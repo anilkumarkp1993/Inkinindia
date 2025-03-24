@@ -1,0 +1,410 @@
+body {
+        background-color: rgba(252, 246, 216, 255);
+    }
+
+   .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 350px; /* Reduced width for a smaller popup */
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group a {
+    font-size: 13px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+.popup-content button {
+    padding: 10px;
+    border: none;
+    background: #ffcc00;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+    transition: background 0.2s ease-in-out;
+}
+
+.popup-content button:hover {
+    background: #e6b800;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    color: red;
+}
+
+
+    div#popup {
+    text-align: -webkit-center;
+    }
+
+    .popup-content {
+    margin-top: 23px;
+   }
+
+        /*.hidden {
+            display: none;
+        }*/
+
+    .feedback-btn {
+        writing-mode: vertical-rl;
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ffcc00;
+        padding: 10px 8px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .header-swiper-container {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .header-swiper-container .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* Styles for Celebration Giftz */
+    .celebration-swiper .swiper-slide {
+        text-align: center;
+        height: auto;
+    }
+
+    .celebration-swiper .swiper-slide .card {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .celebration-swiper .swiper-slide img {
+        width: 100%;
+        height: 15rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .celebration-swiper .swiper-slide img:hover {
+        transform: scale(1.05);
+    }
+
+    .celebration-swiper .swiper-slide p {
+        padding: 0.75rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+    }
+
+    /* Styles for Trending Giftz */
+    .trending-gift-card {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .trending-gift-card .image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .trending-gift-card img {
+        width: 100%;
+        height: 12rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .trending-gift-card img:hover {
+        transform: scale(1.05);
+    }
+
+    .trending-gift-card button {
+        margin-top: 0.75rem;
+        padding: 0.5rem 1rem;
+        border: 2px solid #facc15;
+        background: transparent;
+        border-radius: 9999px;
+        transition: all 0.3s ease;
+    }
+
+    .trending-gift-card button:hover {
+        background: #facc15;
+        color: white;
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 767px) {
+        /* Adjust navbar icons spacing before search opens */
+        .nav-icons {
+            gap: 1rem; /* Explicitly set gap to override Tailwind's space-x-7 */
+        }
+
+        /* Search input styling when open */
+        #search-input.w-64 {
+            width: 90px; /* Fixed width to stay adjacent to logo, not stretch to right */
+            position: absolute;
+            left:-7rem; /* Positioned right of logo (h-10 + padding) */
+            top: 0;
+            z-index: 20;
+            border-radius: 0;
+            padding: 0.5rem 0.5rem 1rem 2rem; /* Adjusted padding to align with search icon */
+            margin-top:-5px;
+            opacity: 1 !important;
+            height: 100%;
+            background: white;
+        }
+
+        /* Search icon positioning before opening */
+        #search-icon {
+            position: relative; /* Changed to relative before opening */
+            z-index: 30;
+        }
+
+        /* Search icon positioning when search is active */
+        .search-active #search-icon {
+            position: absolute;
+            left: -9rem; /* Slightly right of logo, inside search box */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        .navbar-container {
+            position: relative;
+            height: 60px;
+        }
+
+        /* Hide specific icons when search is active */
+        .search-active .nav-icons .user-icon,
+        .search-active .nav-icons .favorite-icon,
+        .search-active .nav-icons .cart-icon {
+            display: none !important;
+        }
+
+        /* Ensure logo remains visible */
+        .navbar-container .flex.items-center > a {
+            z-index: 30;
+        }
+
+        /* Cart icon spacing with higher specificity */
+        .nav-icons .cart-icon {
+            margin-right: 1.5rem !important; /* Increased space to separate from dropdown */
+        }
+
+        /* Mobile menu button styling */
+        #mobile-menu-button {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            display: block !important;
+        }
+
+        /* Mobile menu styling */
+        #mobile-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+        }
+
+        .header-text {
+            font-size: 1.5rem !important;
+            line-height: 1.75rem !important;
+        }
+
+        .offer-banner {
+            height: 3rem !important;
+            padding: 0.5rem !important;
+           
+        }
+
+        .offer-banner h3 {
+            font-size: 1rem !important;
+        }
+
+    }
+     .offer-banner {
+          
+            position: relative; /* Ensure it's positioned */
+            z-index: revert-layer; /* Higher than the popup overlay */
+
+        }
+
+        header {
+        position: relative; /* Ensure it's positioned */
+        z-index: 1002; /* Higher than the popup overlay */
+    }
+
+     .popup-overlay {
+            z-index: 1001; 
+        }
+
+        p#fname {
+    margin-left: 16px;
+    margin-top: -12px;
+    font-size: 12px;
+}
+
+
+ .account-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+        .account-sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+        }
+        .account-sidebar a {
+            display: block;
+            padding: 12px;
+            font-size: 16px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: 0.3s;
+        }
+        .account-sidebar a:hover {
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .account-content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .account-content h3 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        .account-details span {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .account-address {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .account-address h3 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        .btn-custom {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-custom:hover {
+            background: #0056b3;
+        }
+
+        a.menu-link.active {background: #007bff;}
+
+
+        /*important menu link css*/
+
+       a {
+   color: rgb(32 34 38) !important;
+    text-decoration: none !important;
+}
+
+.text-yellow-500 {
+    --tw-text-opacity: 1;
+    color: rgba(245, 158, 11, var(--tw-text-opacity)) !important;
+}
+
+/*important menu link css*/
+
+.wishlist-container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+        .btn-back {
+            margin-top: 15px;
+        }

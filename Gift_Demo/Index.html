@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Index.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- SwiperJS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<style>
+    body {
+        background-color: rgba(252, 246, 216, 255);
+    }
+
+    .feedback-btn {
+        writing-mode: vertical-rl;
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ffcc00;
+        padding: 10px 8px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .swiper-slide {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+</style>
+
+<body>
+
+
+    <!-- <nav class=" border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="./Images/Inkin-india-final-logo-01_320x.avif" class="h-8" alt="Flowbite Logo" />
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="flex flex-col md:flex-row md:space-x-8 font-medium">
+                    <li><a href="" class="block py-2 text-yellow-500  font-semibold text-xl">Home</a></li>
+                    <li><a href="" class="block py-2  hover:text-yellow-500 transition text-xl">Shop</a></li>
+                    <li><a href="" class="block py-2  hover:text-yellow-500 transition text-xl">Celebration</a></li>
+                    <li><a href="" class="block py-2  hover:text-yellow-500 transition text-xl">Bussiness Gift</a>
+                    </li>
+                    <li><a href="" class="block py-2  hover:text-yellow-500 transition text-xl">Vehicle Gift</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+
+    <!-- Navbar -->
+    <nav class="w-full p-4 border-gray-200 dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-10">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2">
+                <img src="./Images/Inkin-india-final-logo-01_320x.avif" class="h-10" alt="Logo">
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6 font-medium text-lg">
+                <li><a href="#" class="text-yellow-500 font-semibold ">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Shop</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Celebration</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Business Gift</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Vehicle Gift</a></li>
+            </ul>
+
+            <!-- Icons -->
+            <div class="flex items-center space-x-7">
+                <!-- <a href="#" class="text-gray-700 hover:text-yellow-500"><i class="fas fa-search"></i></a> -->
+                <div class="relative flex items-center">
+                    <!-- Search Icon -->
+                    <button id="search-icon" class="text-gray-700 hover:text-yellow-500 focus:outline-none">
+                        <i class="fas fa-search "></i>
+                    </button>
+
+                    <!-- Search Input -->
+                    <input type="text" id="search-input"
+                        class="w-0 opacity-0 border border-gray-300 rounded-full px-3 py-2 bg-white transition-all duration-300 ease-in-out outline-none"
+                        placeholder="Search..." />
+                </div>
+
+                <a href="#" class="text-gray-700 hover:text-yellow-500"><i class="fas fa-user"></i></a>
+                <a href="#" class="relative">
+                    <i class="fas fa-heart text-gray-700 hover:text-yellow-500"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                </a>
+                <a href="#" class="relative">
+                    <i class="fas fa-shopping-cart text-gray-700 hover:text-yellow-500"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-700 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-white shadow-md p-4" id="mobile-menu">
+            <ul class="flex flex-col space-y-4 text-lg font-medium text-gray-900">
+                <li><a href="#" class="hover:text-yellow-500">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Shop</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Celebration</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Business Gift</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Vehicle Gift</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Promo Section -->
+
+    <!-- Offer Banner -->
+    <div
+        class="bg-yellow-300 mx-auto my-6 rounded-full p-4 text-center w-3/4 h-20 shadow-lg relative z-10 flex items-center justify-center">
+        <h3 class="text-xl font-bold text-gray-900 animate-pulse">
+            🎉 10% OFF on all purchases! Limited Time Offer 🎉
+        </h3>
+    </div>
+
+
+    <!-- Header Section with Overlap -->
+    <header
+        class="flex flex-col items-center text-center bg-yellow-200 w-2/3 mx-auto rounded-lg p-6 shadow-lg -mt-10 relative z-20">
+        <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+
+            <!-- Text Content -->
+            <div class="space-y-6 text-center md:text-left w-full px-4">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
+                    Make the <br>
+                    Perfect Gift <br> For Your <br> Favorite Person
+                </h1>
+            </div>
+
+            <!-- Swiper Container -->
+            <div class="relative w-full h-64 flex justify-center">
+                <div class="swiper mySwiper w-full h-full">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide flex justify-center items-center">
+                            <img src="./Images/wallet.png" class="w-full h-full object-contain rounded-lg shadow-lg"
+                                alt="Gift Image 1">
+                        </div>
+                       
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- Categories Section -->
+    <div class="container mx-auto px-10 py-10">
+        <div class="max-w-5xl mx-auto text-center p-5">
+            <h2 class="text-4xl md:text-5xl font-bold  tracking-tight ">Trending Giftz</h2>
+
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+
+
+
+            <div class="relative w-full max-w-md mx-auto">
+
+
+                <!-- Gift Box -->
+                <div class="gift-box rounded-lg shadow-lg p-4 text-center">
+                    <div class="image-container rounded-lg mb-2 relative">
+                        <img src="https://img.freepik.com/free-photo/high-angle-hands-opening-present_23-2149426609.jpg?t=st=1741669681~exp=1741673281~hmac=d43c6bfb8c4dcc183cfa76fb7db715c75bc5d9e2385c303c2206dfe6914912ba&w=740"
+                            class="gift-image w-full h-48 object-cover rounded-lg" alt="Personalized">
+                    </div>
+                    <button id="giftButton"
+                        class="gift-button mt-3 px-4 py-2 border-2 border-yellow-400 text-black bg-transparent rounded-full transition duration-300 hover:bg-yellow-400 hover:text-white">
+                        Personalized
+                    </button>
+                </div>
+            </div>
+
+
+
+            <div class=" gift-box  rounded-lg shadow-lg p-4 text-center">
+                <img src="https://orbiz.in/cdn/shop/files/13_1afd9107-9097-4983-ae8c-d17a97f2e1d4.jpg?v=1734674993&width=720"
+                    class="w-full h-48 object-cover rounded-lg" alt="Corporate">
+
+                <button
+                    class="mt-3 px-4 py-2 border-2 border-yellow-400 text-black bg-trasparent rounded-full transition duration-300 hover:bg-yellow-400 hover:text-white">
+                    Corporate
+                </button>
+            </div>
+
+            <div class="gift-box   rounded-lg shadow-lg p-4 text-center">
+                <img src="https://img.freepik.com/free-photo/front-view-holiday-gifts-empty-picture-frame-flowers-dark-red-abstract-background_140725-144981.jpg?t=st=1741669804~exp=1741673404~hmac=38546d5edb078a91cba0a36e4c7f5331f5587eee5d8acc461086a639afe58c1f&w=1380"
+                    class="w-full h-48 object-cover rounded-lg" alt="Mementos">
+
+                <button
+                    class="mt-3 px-4 py-2 border-2 border-yellow-400 text-black bg-trasparent rounded-full transition duration-300 hover:bg-yellow-400 hover:text-white">
+                    Mementos
+                </button>
+            </div>
+
+            <div class=" gift-box  rounded-lg shadow-lg p-4 text-center">
+                <img src="https://img.freepik.com/free-photo/mirror-gold-ribbons_1252-422.jpg?t=st=1741669841~exp=1741673441~hmac=8462f4a9caa7ee68028ed4dcfa6ae8bb6555becb6e1f8971861ca582997b732c&w=1380"
+                    class="w-full h-48 object-cover rounded-lg" alt="Home Decor">
+
+                <button
+                    class="mt-3 px-4 py-2 border-2 border-yellow-400 text-black bg-trasparent rounded-full transition duration-300 hover:bg-yellow-400 hover:text-white">
+                    Home Decor
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mx-auto py-10">
+        <!-- Heading -->
+        <div class="max-w-5xl mx-auto text-center p-5">
+            <h2 class="text-center text-4xl md:text-5xl font-bold tracking-tight mb-6">Celebration Giftz</h2>
+        </div>
+
+        <!-- Swiper Slider -->
+        <div class="swiper mySwiper px-4">
+            <div class="swiper-wrapper">
+                <!-- Card 1 -->
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center cursor-pointer">
+                    <img src="Images/BirthDay.jpg" alt="Birthday"
+                        class="w-full h-60 object-cover rounded-lg transition-transform duration-300 hover:scale-105">
+                    <p class="mt-3 text-lg font-semibold">Birthday</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center">
+                    <img src="./Images/Weddi.jpg" alt="Wedding" class="w-full h-60 object-cover rounded-lg">
+                    <p class="mt-3 text-lg font-semibold">Wedding</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center">
+                    <img src="./Images/Anniversary.jpg" alt="Anniversary" class="w-full h-60 object-cover rounded-lg">
+                    <p class="mt-3 text-lg font-semibold">Anniversary</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center">
+                    <img src="./Images/Valentine.avif" alt="Valentine's Day" class="w-full h-60 object-cover rounded-lg">
+                    <p class="mt-3 text-lg font-semibold">Valentine's Day</p>
+                </div>
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center">
+                    <img src="./Images/house.jpg" alt="Valentine's Day" class="w-full h-60 object-cover rounded-lg">
+                    <p class="mt-3 text-lg font-semibold">House Warming</p>
+                </div>
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center">
+                    <img src="./Images/fathers.jpg" alt="Valentine's Day" class="w-full h-60 object-cover rounded-lg">
+                    <p class="mt-3 text-lg font-semibold">Father's Day</p>
+                </div>
+               
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center">
+                    <img src="./Images/mothers.jpg" alt="Valentine's Day" class="w-full h-60 object-cover rounded-lg">
+                    <p class="mt-3 text-lg font-semibold">Mother's Day</p>
+                </div>
+                <div class="swiper-slide p-4 rounded-lg shadow-lg text-center">
+                    <img src="./Images/teachers.jpg" alt="Valentine's Day" class="w-full h-60 object-cover rounded-lg">
+                    <p class="mt-3 text-lg font-semibold">Teacher's Day</p>
+                </div>
+            </div>
+
+         
+        </div>
+    </div>
+
+
+    <!-- why choose us -->
+
+    <div class="flex flex-wrap justify-around gap-6 mt-12 p-8">
+        <div class="flex items-center gap-2 text-gray-700">
+            <div class="text-center">
+                <div class="text-black font-bold text-2xl">🚚</div>
+                <p class="font-semibold text-2xl">Free Shipping</p>
+                <p class="text-xl">You will love at great low prices.</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-gray-700">
+            <div class="text-center">
+                <div class="text-red-500 font-bold text-2xl">⏳</div>
+                <p class="font-semibold text-2xl">Fast Dispatch</p>
+                <p class="text-xl">Dispatched in 2-3 Days</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-gray-700">
+            <div class="text-center">
+                <div class="text-green-500 font-bold text-2xl">💳</div>
+                <p class="font-semibold text-2xl">Flexible Payment</p>
+                <p class="text-xl">Credit/Debit Cards, UPI, COD</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    <section class="bg-gray-100  py-10">
+        <div class="container mx-auto px-6">
+
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="hover:text-blue-500 transition">
+
+                    <i class="fa-brands fa-facebook-f text-2xl text-blue-500"></i>
+                </a>
+                <a href="#" class="hover:text-blue-400 transition">
+                    <i class="fa-brands fa-x-twitter text-blue-500  text-2xl"></i>
+                </a>
+                <a href="#" class="hover:text-pink-500 transition">
+
+                    <i
+                        class="fa-brands fa-instagram text-2xl  text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text "></i>
+                </a>
+                <a href="#" class="hover:text-red-500 transition">
+                    <i class="fa-brands fa-youtube text-2xl text-red-600"></i>
+
+                </a>
+            </div>
+
+            <!-- Info Sections -->
+            <div class="grid md:grid-cols-4 gap-8 text-center md:text-left">
+
+                <!-- About Us -->
+                <div>
+                    <h6 class="text-lg font-semibold  mb-3">ABOUT US</h6>
+                    <p class="text-sm text-gray-400">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+                    </p>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h5 class="text-lg font-semibold  mb-3">Newsletter</h5>
+                    <form class="flex flex-col space-y-3">
+                        <input type="email" placeholder="Enter your email" class="p-2 rounded  ">
+                        <button
+                            class="bg-yellow-500 text-white  py-2 rounded-lg border-2 border-transparent transition duration-300 hover:border-yellow-600 hover:bg-white hover:text-black">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Need Help -->
+                <div>
+                    <h6 class="text-lg font-semibold  mb-3">NEED HELP</h6>
+                    <p class="text-sm text-gray-400">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+                    </p>
+                </div>
+
+                <!-- Contact Us -->
+                <div>
+                    <h6 class="text-lg font-semibold mb-3">CONTACT US</h6>
+                    <div class="space-y-2 text-gray-400">
+                        <p><i class="fa fa-map-marker"></i> Gb road 123, USA</p>
+                        <p><i class="fa fa-phone"></i> +01 12345678901</p>
+                        <p><i class="fa fa-envelope"></i> vyduryainfo@gmail.com</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 border-t border-gray-700 py-4 text-center">
+            <p class="text-gray-400 text-sm">
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="https://vyduryadigital.com/" class="text-yellow-700 hover:text-yellow-300">Vydurya Digitals</a>
+            </p>
+        </footer>
+
+    </section>
+
+    <!-- Feedback Button -->
+    <div class="feedback-btn">Feedback</div>
+
+</body>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="./Index.js"></script>
+<script>
+
+//NavBar Search Input Box
+const searchContainer = document.getElementById('search-container');
+      const searchIcon = document.getElementById('search-icon');
+      const searchInput = document.getElementById('search-input');
+
+      searchIcon.addEventListener('click', () => {
+        console.log("serch clicked");
+        
+          searchInput.classList.toggle('w-64'); // Expands the input
+          searchInput.classList.toggle('opacity-100'); // Makes input visible
+          searchInput.focus();
+      });
+
+      document.addEventListener('click', (event) => {
+          if (!searchContainer.contains(event.target)) {
+              searchInput.classList.remove('w-64', 'opacity-100'); // Closes input
+          }
+      });
+
+
+      //NavBar
+
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+  });
+
+
+
+//   Gift Slider
+var swiper = new Swiper(".mySwiper", {
+    loop: true,  // Enables infinite looping
+    autoplay: {
+        delay: 2500,  // Moves automatically every 2.5 seconds
+        disableOnInteraction: false,  // Keeps autoplay running after user interaction
+    },
+    speed: 1000,  // Ensures smooth 1-second transition between slides
+    slidesPerView: 1,  // Default: 1 slide per view (adjusted for responsive breakpoints)
+    spaceBetween: 20,  // Adds spacing between slides
+    centeredSlides: false,  // Ensures slides align properly (no empty slides)
+    slidesPerGroup: 1,  // Moves 1 slide at a time (prevents skipping)
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+        768: { slidesPerView: 2 },  // Show 2 slides on tablets
+        1024: { slidesPerView: 4 }  // Show 4 slides on desktops
+    }
+});
+
+
+</script>
+
+</html>

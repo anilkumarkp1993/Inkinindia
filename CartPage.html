@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- SwiperJS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        /* Custom styles for specific tweaks */
+
+        .payment-box {
+            /* background-color: #FFC107; */
+            /* Yellow background */
+            border-radius: 15px;
+        }
+
+        .underline-link {
+            text-decoration: underline;
+            color: #000;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .payment-option input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .payment-option label {
+            flex: 1;
+        }
+
+        .payment-option img {
+            width: 30px;
+            height: auto;
+            margin-left: 0.5rem;
+        }
+
+        .secure-checkout img {
+            width: 30px;
+            height: auto;
+            margin-right: 0.5rem;
+        }
+
+        .custom-underline {
+            text-decoration-color: black;
+            /* Red underline */
+            text-decoration-thickness: 2px;
+            /* Thicker underline */
+        }
+        
+    .feedback-btn {
+        writing-mode: vertical-rl;
+        z-index: 1000;
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ffcc00;
+        padding: 10px 8px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+     /* Mobile-specific styles */
+     @media (max-width: 767px) {
+        /* Adjust navbar icons spacing before search opens */
+        .nav-icons {
+            gap: 1rem; /* Explicitly set gap to override Tailwind's space-x-7 */
+        }
+
+        /* Search input styling when open */
+        #search-input.w-64 {
+            width: 90px; /* Fixed width to stay adjacent to logo, not stretch to right */
+            position: absolute;
+            left:-7rem; /* Positioned right of logo (h-10 + padding) */
+            top: 0;
+            z-index: 20;
+            border-radius: 0;
+            padding: 0.5rem 0.5rem 1rem 2rem; /* Adjusted padding to align with search icon */
+            margin-top:-5px;
+            opacity: 1 !important;
+            height: 100%;
+            background: white;
+        }
+
+        /* Search icon positioning before opening */
+        #search-icon {
+            position: relative; /* Changed to relative before opening */
+            z-index: 30;
+        }
+
+        /* Search icon positioning when search is active */
+        .search-active #search-icon {
+            position: absolute;
+            left: -9rem; /* Slightly right of logo, inside search box */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        .navbar-container {
+            position: relative;
+            height: 60px;
+        }
+
+        /* Hide specific icons when search is active */
+        .search-active .nav-icons .user-icon,
+        .search-active .nav-icons .favorite-icon,
+        .search-active .nav-icons .cart-icon {
+            display: none !important;
+        }
+
+        /* Ensure logo remains visible */
+        .navbar-container .flex.items-center > a {
+            z-index: 30;
+        }
+
+        /* Cart icon spacing with higher specificity */
+        .nav-icons .cart-icon {
+            margin-right: 1.5rem !important; /* Increased space to separate from dropdown */
+        }
+
+        /* Mobile menu button styling */
+        #mobile-menu-button {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            display: block !important;
+        }
+
+        /* Mobile menu styling */
+        #mobile-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+        }
+
+        .header-text {
+            font-size: 1.5rem !important;
+            line-height: 1.75rem !important;
+        }
+
+        .offer-banner {
+            height: 3rem !important;
+            padding: 0.5rem !important;
+        }
+
+        .offer-banner h3 {
+            font-size: 1rem !important;
+        }
+    }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-4">
+        <!-- Navigation -->
+       
+        <nav class="w-full p-4 border-gray-200 dark:bg-gray-900">
+            <div class="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-10 navbar-container">
+                <a href="#" class="flex items-center space-x-2">
+                    <img src="./Images/Inkin-india-final-logo-01_320x.avif" class="h-10" alt="Logo">
+                </a>
+                <ul class="hidden md:flex space-x-6 font-medium text-lg">
+                    <li><a href="Index.html" class="text-yellow-500 font-semibold">Home</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition">Shop</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition">Celebration</a></li>
+                    <li><a href="BirthdayGift.html" class="hover:text-yellow-500 transition">Birthday Gift</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition">Vehicle Gift</a></li>
+                </ul>
+                <div class="flex items-center space-x-7 nav-icons">
+                    <div class="relative flex items-center">
+                        <button id="search-icon" class="text-gray-700 hover:text-yellow-500 focus:outline-none">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <input type="text" id="search-input"
+                            class="w-0 opacity-0 border border-gray-300 rounded-full px-3 py-2 bg-white transition-all duration-300 ease-in-out outline-none"
+                            placeholder="Search..." />
+                    </div>
+                    <a href="#" class="text-gray-700 hover:text-yellow-500 nav-icon user-icon"><i class="fas fa-user"></i></a>
+                    <a href="#" class="relative nav-icon favorite-icon">
+                        <i class="fas fa-heart text-gray-700 hover:text-yellow-500"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                    </a>
+                    <a href="#" class="relative nav-icon cart-icon">
+                        <i class="fas fa-shopping-cart text-gray-700 hover:text-yellow-500"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                    </a>
+                </div>
+                <button class="md:hidden text-gray-700 focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div class="hidden md:hidden bg-white shadow-md p-4" id="mobile-menu">
+                <ul class="flex flex-col space-y-4 text-lg font-medium text-gray-900">
+                    <li><a href="Index.html" class="hover:text-yellow-500">Home</a></li>
+                    <li><a href="#" class="hover:text-yellow-500">Shop</a></li>
+                    <li><a href="#" class="hover:text-yellow-500">Celebration</a></li>
+                    <li><a href="BirthdayGift.html" class="hover:text-yellow-500">BirthDay Gift</a></li>
+                    <li><a href="#" class="hover:text-yellow-500">Vehicle Gift</a></li>
+                </ul>
+            </div>
+        </nav>
+    
+
+        <!-- Main Content -->
+        <div class="flex flex-col md:flex-row gap-4">
+            <!-- Shopping Cart Section -->
+            <div class="flex-1 bg-white p-6 rounded-lg shadow-md max-w-md mx-auto md:max-w-lg lg:max-w-xl">
+                <h2 class="text-2xl font-bold mb-5 underline custom-underline text-center">Shopping Cart</h2>
+                <div class="flex flex-col md:flex-row items-center mb-4">
+                    <img src="https://irishomefragrances.com/cdn/shop/products/01-INFG0314LK.jpg?v=1704262008&width=2048"
+                        alt="Gift Set" class="w-32 h-40 md:w-40 md:h-50 mr-0 md:mr-4 mb-4 md:mb-0">
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="text-lg font-semibold">Sustainable Corporate Gift Set</h3>
+                        <p class="text-gray-600">Qty x 1</p>
+                    </div>
+                    <p class="text-lg font-bold">Rs.:469</p>
+                </div>
+                <hr class="my-4 border-t-2 border-black">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">TOTAL</h3>
+                    <p class="text-xl font-bold">Rs.:469</p> 
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="w-full md:w-1/3 payment-box p-6 rounded-lg shadow-md bg-yellow-400">
+                <h2 class="text-2xl font-bold mb-4">Payment</h2>
+                <p class="text-sm text-gray-700 mb-4">All transactions are secure & encrypted.</p>
+
+
+
+                <div id="paymentOptions" class="space-y-2">
+                    <label
+                        class="flex items-center p-2 mb-1 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:border-yellow-500"
+                        data-option="credit-card">
+                        <input type="radio" name="payment" class="peer " value="credit-card">
+                        <span class="mr-2 text-sm">Credit card</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Visa_2021.svg/1200px-Visa_2021.svg.png"
+                            alt="Cards" class="ml-auto h-4">
+
+                    </label>
+
+                    <label
+                        class="flex items-center p-2 mb-1 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:border-yellow-500"
+                        data-option="paypal">
+                        <input type="radio" name="payment" class="peer " value="paypal">
+                        <span class="mr-2 text-sm">PayPal</span>
+                        <!-- <img src="paypal-icon.png" alt="PayPal" class="ml-auto h-4"> -->
+                        <img src="https://img.etimg.com/thumb/width-1200,height-1200,imgsize-65365,resizemode-75,msid-79823500/industry/banking/finance/paypal-faces-rs-96-lakh-penalty-for-violating-indias-anti-money-laundering-processes.jpg"
+                            alt="PayPal" class="ml-auto h-4">
+                    </label>
+
+                    <label
+                        class="flex items-center p-2 mb-1 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:border-yellow-500"
+                        data-option="zip">
+                        <input type="radio" name="payment" class="peer " value="zip">
+                        <span class="mr-2 text-sm">Pay in 4 with Zip</span>
+                        <img src="https://play-lh.googleusercontent.com/2EodQEFn6EvpiPFw3EJjaf5KcJiL8yoJYC5zsMOYMrUDV_85K7LGVa37U6DcG-8UwobY"
+                            alt="Zip" class="ml-auto h-4">
+                    </label>
+
+                    <label
+                        class="flex items-center p-2 mb-1 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:border-yellow-500"
+                        data-option="sezzle">
+                        <input type="radio" name="payment" class="peer " value="sezzle">
+                        <span class="mr-2 text-sm">Buy Now, Pay Later with Sezzle</span>
+                        <img src="https://m.economictimes.com/thumb/msid-90718492,width-1200,height-900,resizemode-4,imgsize-10784/sezzle.jpg"
+                            alt="Sezzle" class="ml-auto h-4">
+                    </label>
+
+                    <label
+                        class="flex items-center p-2 mb-1 border-2 border-gray-300 rounded-lg cursor-pointer transition hover:border-yellow-500 peer-checked:border-yellow-500"
+                        data-option="directpay">
+                        <input type="radio" name="payment" class="peer " value="directpay">
+                        <span class="mr-2 text-sm">Interac e-Transfer with DirectPay</span>
+                        <img src="https://paymentgateways.org.in/images/gateways/directpay.jpg" alt="DirectPay"
+                            class="ml-auto h-4">
+                    </label>
+                </div>
+
+
+                <!-- Secure Checkout -->
+                <div class="mt-6">
+                    <p class="text-sm font-semibold mb-2">Secure Checkout With</p>
+                    <div class="flex space-x-4">
+                        <img src="https://i.pinimg.com/564x/8d/ec/e1/8dece15cc40aaf66ed47f6591b639d06.jpg"
+                            alt="Google Pay" class="w-8">
+                        <img src="https://logos-world.net/wp-content/uploads/2020/06/Visa-Logo-2006.png" alt="Visa"
+                            class="w-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/1024px-Apple_Pay_logo.svg.png"
+                            alt="Apple Pay" class="w-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/RuPay.svg/2560px-RuPay.svg.png"
+                            alt="RuPay" class="w-8">
+                        <img src="https://m.economictimes.com/thumb/msid-74960608,width-1200,height-900,resizemode-4,imgsize-49172/upi-twitter.jpg"
+                            alt="UPI" class="w-8">
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="mt-4 text-sm">
+                    <a href="#" class="underline-link block">Returns Policies +</a>
+                    <a href="#" class="underline-link block">Product Disclaimer +</a>
+                </div>
+
+                <!-- Buy Now Button -->
+                <button class="w-full bg-blue-600 text-white py-2 rounded-lg mt-4 hover:bg-blue-700">Buy Now</button>
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="mt-6 text-sm text-gray-600">
+            <p>Estimate delivery time: 3-5 days within Kerala & 7 Days rest of India</p>
+            <p>Use code "WELCOME10" for 10% discount on your first order.</p>
+            <p>Free shipping: On all orders over Rs 499</p>
+        </div>
+    </div>
+     <!-- Feedback Button -->
+     <div class="feedback-btn">Feedback</div>
+
+        <!-- Call Contact Button -->
+    <div class="fixed bottom-4 right-4 bg-yellow-500 text-white p-4 rounded-full shadow-lg flex items-center gap-2 hover:bg-yellow-600 transition pulse-animation">
+        <i class="fas fa-headset"></i>
+        
+    </div>
+</body>
+<script>
+    const labels = document.querySelectorAll("#paymentOptions label");
+
+    labels.forEach(label => {
+        label.addEventListener("click", () => {
+            labels.forEach(l => l.classList.remove("border-yellow-500"));
+            label.classList.add("border-yellow-500");
+        });
+    });
+    
+// NavBar Search Input Box
+    const searchIcon = document.getElementById('search-icon');
+    const searchInput = document.getElementById('search-input');
+    const navIcons = document.querySelector('.nav-icons');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const navbarContainer = document.querySelector('.navbar-container');
+
+    searchIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchInput.classList.toggle('w-64');
+        searchInput.classList.toggle('opacity-100');
+        searchInput.focus();
+
+        if (window.innerWidth < 768) {
+            if (searchInput.classList.contains('w-64')) {
+                navbarContainer.classList.add('search-active');
+                navIcons.style.display = 'flex'; // Keep container for layout
+            } else {
+                navbarContainer.classList.remove('search-active');
+                navIcons.style.display = 'flex';
+            }
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!searchIcon.contains(event.target) && !searchInput.contains(event.target)) {
+            searchInput.classList.remove('w-64', 'opacity-100');
+            if (window.innerWidth < 768) {
+                navbarContainer.classList.remove('search-active');
+                navIcons.style.display = 'flex'; // Restore all icons
+            }
+        }
+    });
+
+    // NavBar Mobile Menu
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+
+</script>
+
+</html>

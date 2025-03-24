@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Index.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- SwiperJS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<style>
+    body {
+        background-color: rgba(252, 246, 216, 255);
+    }
+
+   .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 350px; /* Reduced width for a smaller popup */
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.popup-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group a {
+    font-size: 13px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+.popup-content button {
+    padding: 10px;
+    border: none;
+    background: #ffcc00;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+    transition: background 0.2s ease-in-out;
+}
+
+.popup-content button:hover {
+    background: #e6b800;
+}
+
+.close-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    color: red;
+}
+
+
+    div#popup {
+    text-align: -webkit-center;
+    }
+
+    .popup-content {
+    margin-top: 23px;
+   }
+
+        /*.hidden {
+            display: none;
+        }*/
+
+    .feedback-btn {
+        writing-mode: vertical-rl;
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ffcc00;
+        padding: 10px 8px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .header-swiper-container {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .header-swiper-container .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* Styles for Celebration Giftz */
+    .celebration-swiper .swiper-slide {
+        text-align: center;
+        height: auto;
+    }
+
+    .celebration-swiper .swiper-slide .card {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .celebration-swiper .swiper-slide img {
+        width: 100%;
+        height: 15rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .celebration-swiper .swiper-slide img:hover {
+        transform: scale(1.05);
+    }
+
+    .celebration-swiper .swiper-slide p {
+        padding: 0.75rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+    }
+
+    /* Styles for Trending Giftz */
+    .trending-gift-card {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .trending-gift-card .image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .trending-gift-card img {
+        width: 100%;
+        height: 12rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .trending-gift-card img:hover {
+        transform: scale(1.05);
+    }
+
+    .trending-gift-card button {
+        margin-top: 0.75rem;
+        padding: 0.5rem 1rem;
+        border: 2px solid #facc15;
+        background: transparent;
+        border-radius: 9999px;
+        transition: all 0.3s ease;
+    }
+
+    .trending-gift-card button:hover {
+        background: #facc15;
+        color: white;
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 767px) {
+        /* Adjust navbar icons spacing before search opens */
+        .nav-icons {
+            gap: 1rem; /* Explicitly set gap to override Tailwind's space-x-7 */
+        }
+
+        /* Search input styling when open */
+        #search-input.w-64 {
+            width: 90px; /* Fixed width to stay adjacent to logo, not stretch to right */
+            position: absolute;
+            left:-7rem; /* Positioned right of logo (h-10 + padding) */
+            top: 0;
+            z-index: 20;
+            border-radius: 0;
+            padding: 0.5rem 0.5rem 1rem 2rem; /* Adjusted padding to align with search icon */
+            margin-top:-5px;
+            opacity: 1 !important;
+            height: 100%;
+            background: white;
+        }
+
+        /* Search icon positioning before opening */
+        #search-icon {
+            position: relative; /* Changed to relative before opening */
+            z-index: 30;
+        }
+
+        /* Search icon positioning when search is active */
+        .search-active #search-icon {
+            position: absolute;
+            left: -9rem; /* Slightly right of logo, inside search box */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        .navbar-container {
+            position: relative;
+            height: 60px;
+        }
+
+        /* Hide specific icons when search is active */
+        .search-active .nav-icons .user-icon,
+        .search-active .nav-icons .favorite-icon,
+        .search-active .nav-icons .cart-icon {
+            display: none !important;
+        }
+
+        /* Ensure logo remains visible */
+        .navbar-container .flex.items-center > a {
+            z-index: 30;
+        }
+
+        /* Cart icon spacing with higher specificity */
+        .nav-icons .cart-icon {
+            margin-right: 1.5rem !important; /* Increased space to separate from dropdown */
+        }
+
+        /* Mobile menu button styling */
+        #mobile-menu-button {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            display: block !important;
+        }
+
+        /* Mobile menu styling */
+        #mobile-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+        }
+
+        .header-text {
+            font-size: 1.5rem !important;
+            line-height: 1.75rem !important;
+        }
+
+        .offer-banner {
+            height: 3rem !important;
+            padding: 0.5rem !important;
+           
+        }
+
+        .offer-banner h3 {
+            font-size: 1rem !important;
+        }
+
+    }
+     .offer-banner {
+          
+            position: relative; /* Ensure it's positioned */
+            z-index: revert-layer; /* Higher than the popup overlay */
+
+        }
+
+        header {
+        position: relative; /* Ensure it's positioned */
+        z-index: 1002; /* Higher than the popup overlay */
+    }
+
+     .popup-overlay {
+            z-index: 1001; 
+        }
+</style>
+
+<body>
+    <!-- Navbar -->
+    <nav class="w-full p-4 border-gray-200 dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-10 navbar-container">
+            <a href="#" class="flex items-center space-x-2">
+                <img src="./Images/Inkin-india-final-logo-01_320x.avif" class="h-10" alt="Logo">
+            </a>
+            <ul class="hidden md:flex space-x-6 font-medium text-lg">
+                <li><a href="#" class="text-yellow-500 font-semibold">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Shop</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Celebration</a></li>
+                <li><a href="BirthdayGift.html" class="hover:text-yellow-500 transition">Birthday Gift</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Vehicle Gift</a></li>
+            </ul>
+            <div class="flex items-center space-x-7 nav-icons">
+                <div class="relative flex items-center">
+                    <button id="search-icon" class="text-gray-700 hover:text-yellow-500 focus:outline-none">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <input type="text" id="search-input"
+                        class="w-0 opacity-0 border border-gray-300 rounded-full px-3 py-2 bg-white transition-all duration-300 ease-in-out outline-none"
+                        placeholder="Search..." />
+                </div>
+
+               <!--  <a href="#"  id="open-popup" class="text-gray-700 hover:text-yellow-500 nav-icon user-icon"><i class="fas fa-user"></i></a> -->
+
+                 <a href="#" id="open-popup" class="nav-icon">
+        <i class="fas fa-user"></i>
+    </a>
+
+
+                <a href="#" class="relative nav-icon favorite-icon">
+                    <i class="fas fa-heart text-gray-700 hover:text-yellow-500"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                </a>
+                <a href="Product.html" class="relative nav-icon cart-icon">
+                    <i class="fas fa-shopping-cart text-gray-700 hover:text-yellow-500"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                </a>
+            </div>
+            <button class="md:hidden text-gray-700 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div class="hidden md:hidden bg-white shadow-md p-4" id="mobile-menu">
+            <ul class="flex flex-col space-y-4 text-lg font-medium text-gray-900">
+                <li><a href="#" class="hover:text-yellow-500">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Shop</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Celebration</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Business Gift</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Vehicle Gift</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Offer Banner -->
+    <div class="bg-yellow-300 mx-auto my-6 rounded-full p-4 text-center w-3/4 h-20 shadow-lg relative z-10 flex items-center justify-center offer-banner off-ban">
+        <h3 class="text-xl font-bold text-gray-900 animate-pulse">
+            🎉 10% OFF on all purchases! Limited Time Offer 🎉
+        </h3>
+    </div>
+
+    <!-- Header Section -->
+    <header class="flex flex-col items-center text-center bg-yellow-200 w-2/3 mx-auto rounded-lg p-6 shadow-lg -mt-10 relative z-20">
+        <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+            <div class="space-y-6 text-center md:text-left w-full px-4">
+                <h1 class="text-3xl font-extrabold leading-tight text-gray-900 header-text">
+                    Make the <br>
+                    Perfect Gift <br> For Your <br> Favorite Person
+                </h1>
+            </div>
+            <div class="relative w-full header-swiper-container">
+                <div class="swiper header-swiper w-full h-full">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide flex justify-center items-center">
+                            <img src="./Images/wallet.png" class="rounded-lg shadow-lg" alt="Gift Image 1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories Section (Trending Giftz) -->
+    <div class="container mx-auto px-10 py-10">
+        <div class="max-w-5xl mx-auto text-center p-5">
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight">Trending Giftz</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="trending-gift-card">
+                <div class="image-container">
+                    <img src="https://img.freepik.com/free-photo/high-angle-hands-opening-present_23-2149426609.jpg?t=st=1741669681~exp=1741673281~hmac=d43c6bfb8c4dcc183cfa76fb7db715c75bc5d9e2385c303c2206dfe6914912ba&w=740"
+                        alt="Personalized">
+                </div>
+                <button id="giftButton">Personalized</button>
+            </div>
+            <div class="trending-gift-card">
+                <div class="image-container">
+                    <img src="https://orbiz.in/cdn/shop/files/13_1afd9107-9097-4983-ae8c-d17a97f2e1d4.jpg?v=1734674993&width=720"
+                        alt="Corporate">
+                </div>
+                <button>Corporate</button>
+            </div>
+            <div class="trending-gift-card">
+                <div class="image-container">
+                    <img src="https://img.freepik.com/free-photo/front-view-holiday-gifts-empty-picture-frame-flowers-dark-red-abstract-background_140725-144981.jpg?t=st=1741669804~exp=1741673404~hmac=38546d5edb078a91cba0a36e4c7f5331f5587eee5d8acc461086a639afe58c1f&w=1380"
+                        alt="Mementos">
+                </div>
+                <button>Mementos</button>
+            </div>
+            <div class="trending-gift-card">
+                <div class="image-container">
+                    <img src="https://img.freepik.com/free-photo/mirror-gold-ribbons_1252-422.jpg?t=st=1741669841~exp=1741673441~hmac=8462f4a9caa7ee68028ed4dcfa6ae8bb6555becb6e1f8971861ca582997b732c&w=1380"
+                        alt="Home Decor">
+                </div>
+                <button>Home Decor</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Giftz -->
+    <div class="container mx-auto py-10">
+        <div class="max-w-5xl mx-auto text-center p-5">
+            <h2 class="text-center text-4xl md:text-5xl font-bold tracking-tight mb-6">Celebration Giftz</h2>
+        </div>
+        <div class="swiper celebration-swiper px-4">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="Images/BirthDay.jpg" alt="Birthday">
+                        <p>Birthday</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="./Images/Weddi.jpg" alt="Wedding">
+                        <p>Wedding</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="./Images/Anniversary.jpg" alt="Anniversary">
+                        <p>Anniversary</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="./Images/Valentine.avif" alt="Valentine's Day">
+                        <p>Valentine's Day</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="./Images/house.jpg" alt="House Warming">
+                        <p>House Warming</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="./Images/fathers.jpg" alt="Father's Day">
+                        <p>Father's Day</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="./Images/mothers.jpg" alt="Mother's Day">
+                        <p>Mother's Day</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="./Images/teachers.jpg" alt="Teacher's Day">
+                        <p>Teacher's Day</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="flex flex-wrap justify-around gap-6 mt-12 p-8">
+        <div class="flex items-center gap-2 text-gray-700">
+            <div class="text-center">
+                <div class="text-black font-bold text-2xl">🚚</div>
+                <p class="font-semibold text-2xl">Free Shipping</p>
+                <p class="text-xl">You will love at great low prices.</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-gray-700">
+            <div class="text-center">
+                <div class="text-red-500 font-bold text-2xl">⏳</div>
+                <p class="font-semibold text-2xl">Fast Dispatch</p>
+                <p class="text-xl">Dispatched in 2-3 Days</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-gray-700">
+            <div class="text-center">
+                <div class="text-green-500 font-bold text-2xl">💳</div>
+                <p class="font-semibold text-2xl">Flexible Payment</p>
+                <p class="text-xl">Credit/Debit Cards, UPI, COD</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <section class="bg-gray-100 py-10">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="hover:text-blue-500 transition">
+                    <i class="fa-brands fa-facebook-f text-2xl text-blue-500"></i>
+                </a>
+                <a href="#" class="hover:text-blue-400 transition">
+                    <i class="fa-brands fa-x-twitter text-blue-500 text-2xl"></i>
+                </a>
+                <a href="#" class="hover:text-pink-500 transition">
+                    <i class="fa-brands fa-instagram text-2xl text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text"></i>
+                </a>
+                <a href="#" class="hover:text-red-500 transition">
+                    <i class="fa-brands fa-youtube text-2xl text-red-600"></i>
+                </a>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8 text-center md:text-left">
+                <div>
+                    <h6 class="text-lg font-semibold mb-3">ABOUT US</h6>
+                    <p class="text-sm text-gray-400">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-3">Newsletter</h5>
+                    <form class="flex flex-col space-y-3">
+                        <input type="email" placeholder="Enter your email" class="p-2 rounded">
+                        <button
+                            class="bg-yellow-500 text-white py-2 rounded-lg border-2 border-transparent transition duration-300 hover:border-yellow-600 hover:bg-white hover:text-black">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <h6 class="text-lg font-semibold mb-3">NEED HELP</h6>
+                    <p class="text-sm text-gray-400">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+                    </p>
+                </div>
+                <div>
+                    <h6 class="text-lg font-semibold mb-3">CONTACT US</h6>
+                    <div class="space-y-2 text-gray-400">
+                        <p><i class="fa fa-map-marker"></i> Gb road 123, USA</p>
+                        <p><i class="fa fa-phone"></i> +01 12345678901</p>
+                        <p><i class="fa fa-envelope"></i> vyduryainfo@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="mt-8 border-t border-gray-700 py-4 text-center">
+            <p class="text-gray-400 text-sm">
+                © <span id="displayYear"></span> All Rights Reserved By
+                <a href="https://vyduryadigital.com/" class="text-yellow-700 hover:text-yellow-300">Vydurya Digitals</a>
+            </p>
+        </footer>
+    </section>
+
+    <!-- Feedback Button -->
+    <div class="feedback-btn">Feedback</div>
+
+
+     <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="close-popup">&times;</span>
+            
+            <!-- Sign In Form -->
+            <div id="login-form">
+                <h2>Sign In</h2>
+                <p>Please enter your details below to sign in.</p>
+                <div class="form-group">
+                    <label>Your Email*</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password*</label>
+                    <input type="password" placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <a href="#">Forgot your password?</a>
+                </div>
+                <button id="login-btn">Login</button>
+                <button id="show-register">Create Account</button>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="hidden">
+                <h2>Create Account</h2>
+                <p>Please register below to create an account.</p>
+                <div class="form-group">
+                    <label>First Name*</label>
+                    <input type="text" placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name*</label>
+                    <input type="text" placeholder="Enter your last name">
+                </div>
+                <div class="form-group">
+                    <label>Your Email*</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password*</label>
+                    <input type="password" placeholder="Enter your password">
+                </div>
+                <p style="font-size: 14px; color: gray;">
+                    Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.
+                </p>
+                <button id="register-btn">Create Account</button>
+                <button id="show-login">Login</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    
+
+</body>
+<!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
+<script src="./Index.js"></script>
+
+
+<script>
+        $(document).ready(function() {
+            // Open Popup
+            $("#open-popup").click(function() {
+                $("#popup").fadeIn();
+            });
+
+            // Close Popup
+            $("#close-popup").click(function() {
+                $("#popup").fadeOut();
+            });
+
+            // Show Register Form
+            $("#show-register").click(function() {
+                $("#login-form").hide();
+                $("#register-form").fadeIn();
+            });
+
+            // Show Login Form
+            $("#show-login").click(function() {
+                $("#register-form").hide();
+                $("#login-form").fadeIn();
+            });
+        });
+    </script>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const popupOverlay = document.getElementById("popup-overlay");
+    const openPopupBtn = document.querySelector(".user-icon"); // Your button
+    const closePopupBtn = document.querySelector(".close-btn");
+    const headerSection = document.querySelector("header"); // Select header
+
+    // Open popup and hide header
+    openPopupBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        popupOverlay.style.display = "flex";
+        headerSection.style.display = "none"; // Hide the header
+    });
+
+    // Close popup and show header
+    closePopupBtn.addEventListener("click", function() {
+        popupOverlay.style.display = "none";
+        headerSection.style.display = "flex"; // Show the header back
+    });
+});
+
+
+
+    // NavBar Search Input Box
+    const searchIcon = document.getElementById('search-icon');
+    const searchInput = document.getElementById('search-input');
+    const navIcons = document.querySelector('.nav-icons');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const navbarContainer = document.querySelector('.navbar-container');
+
+    searchIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchInput.classList.toggle('w-64');
+        searchInput.classList.toggle('opacity-100');
+        searchInput.focus();
+
+        if (window.innerWidth < 768) {
+            if (searchInput.classList.contains('w-64')) {
+                navbarContainer.classList.add('search-active');
+                navIcons.style.display = 'flex'; // Keep container for layout
+            } else {
+                navbarContainer.classList.remove('search-active');
+                navIcons.style.display = 'flex';
+            }
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!searchIcon.contains(event.target) && !searchInput.contains(event.target)) {
+            searchInput.classList.remove('w-64', 'opacity-100');
+            if (window.innerWidth < 768) {
+                navbarContainer.classList.remove('search-active');
+                navIcons.style.display = 'flex'; // Restore all icons
+            }
+        }
+    });
+
+    // NavBar Mobile Menu
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Header Slider
+    var headerSwiper = new Swiper(".header-swiper", {
+        loop: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        speed: 1000,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        centeredSlides: false,
+        slidesPerGroup: 1,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        }
+    });
+
+    // Celebration Slider
+    var celebrationSwiper = new Swiper(".celebration-swiper", {
+        loop: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        speed: 1000,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        centeredSlides: false,
+        slidesPerGroup: 1,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            768: { 
+                slidesPerView: 2 
+            },
+            1024: { 
+                slidesPerView: 4 
+            }
+        }
+    });
+
+    // Set current year in footer
+    document.getElementById('displayYear').textContent = new Date().getFullYear();
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("popup");
+    const closePopup = document.getElementById("close-popup");
+    const showRegister = document.getElementById("show-register");
+    const showLogin = document.getElementById("show-login");
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+
+    // Show Register Form
+    showRegister.addEventListener("click", function () {
+        loginForm.style.display = "none";
+        registerForm.style.display = "block";
+    });
+
+    // Show Login Form
+    showLogin.addEventListener("click", function () {
+        registerForm.style.display = "none";
+        loginForm.style.display = "block";
+    });
+
+    // Close Popup
+    closePopup.addEventListener("click", function () {
+        popup.style.display = "none";
+    });
+
+    // AJAX Register
+    document.getElementById("register-btn").addEventListener("click", function () {
+        const firstName = document.querySelector("#register-form input[placeholder='Enter your first name']").value;
+        const lastName = document.querySelector("#register-form input[placeholder='Enter your last name']").value;
+        const email = document.querySelector("#register-form input[placeholder='Enter your email']").value;
+        const password = document.querySelector("#register-form input[placeholder='Enter your password']").value;
+
+        if (!firstName || !lastName || !email || !password) {
+            alert("All fields are required!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("action", "register");
+        formData.append("first_name", firstName);
+        formData.append("last_name", lastName);
+        formData.append("email", email);
+        formData.append("password", password);
+
+        fetch("auth.php", { method: "POST", body: formData })
+            .then(response => response.text())
+            .then(data => {
+                if (data === "success") {
+                    alert("Registration successful! You can now log in.");
+                    registerForm.style.display = "none";
+                    loginForm.style.display = "block";
+                } else {
+                    alert(data);
+                }
+            });
+    });
+
+    // AJAX Login
+    document.getElementById("login-btn").addEventListener("click", function () {
+        const email = document.querySelector("#login-form input[placeholder='Enter your email']").value;
+        const password = document.querySelector("#login-form input[placeholder='Enter your password']").value;
+
+        if (!email || !password) {
+            alert("Both fields are required!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("action", "login");
+        formData.append("email", email);
+        formData.append("password", password);
+
+        fetch("auth.php", { method: "POST", body: formData })
+            .then(response => response.text())
+            .then(data => {
+                if (data === "success") {
+                    alert("Login successful!");
+                    window.location.href = "dashboard.php"; // Redirect after login
+                } else {
+                    alert(data);
+                }
+            });
+    });
+});
+
+</script>
+
+</html>

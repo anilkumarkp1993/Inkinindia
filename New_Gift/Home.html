@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile First Layout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <style>
+        .mySwiper2 .swiper-slide {
+            margin-right: 0 !important;
+            padding: 0 !important;
+        }
+        .mySwiper2 .swiper-slide a {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .mySwiper2 .swiper-slide .relative {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    </style>
+</head>
+
+<body class="font-sans pb-5 md:pb-0">
+  <header class="fixed top-0 left-0 right-0 bg-white z-50">
+    <div class="w-full mx-auto px-6 py-4 flex items-center justify-between">
+        <button class="p-2 focus:outline-none md:hidden" id="sidebarToggle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+        <a href="#" class="flex items-center">
+            <img src="./images/logo.avif" alt="Logo" class="h-10 w-auto">
+        </a>
+
+        <nav class="hidden md:flex space-x-6 text-lg font-medium">
+            <a href="#" class="text-yellow-500 font-semibold hover:text-yellow-600">Home</a>
+            <a href="#" class="hover:text-yellow-500 transition">Shop</a>
+            <a href="#" class="hover:text-yellow-500 transition">Celebration</a>
+            <a href="BirthdayGift.html" class="hover:text-yellow-500 transition">Birthday Gift</a>
+            <a href="#" class="hover:text-yellow-500 transition">Vehicle Gift</a>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+            <button class="p-2 hover:text-yellow-500 transition">
+                <i class="fas fa-search text-xl"></i>
+            </button>
+            
+            <!-- User Icon (visible only on desktop) -->
+            <div class="relative hidden md:block">
+                <button class="p-2 hover:text-yellow-500 transition">
+                    <i class="far fa-user text-xl"></i>
+                </button>                
+            </div>
+
+            <!-- Wishlist Icon (visible only on desktop) -->
+            <div class="relative hidden md:block">
+                <button class="p-2 hover:text-yellow-500 transition">
+                    <i class="far fa-heart text-xl"></i>
+                </button>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+            </div>
+
+            <!-- Cart Icon -->
+            <div class="relative">
+                <button class="p-2 hover:text-yellow-500 transition">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                </button>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">2</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden z-50" id="sidebar">
+        <div class="p-4">
+            <button class="p-2 focus:outline-none" id="closeSidebar">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <nav class="mt-4">
+                <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded">Home</a>
+                <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded">Shop</a>
+                <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded">For You</a>
+                <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100 rounded">For Business</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg p-3 flex justify-around items-center border-t z-50">
+        <a href="#" class="flex flex-col items-center text-gray-700 hover:text-yellow-500">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs">Home</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-700 hover:text-yellow-500">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs">Account</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-700 hover:text-yellow-500 relative">
+            <i class="fas fa-heart text-xl"></i>
+            <span class="absolute -top-1 -right-3 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+            <span class="text-xs">Wishlist</span>
+        </a>
+        <a href="Product.html" class="flex flex-col items-center text-gray-700 hover:text-yellow-500 relative">
+            <i class="fas fa-shopping-cart text-xl"></i>
+            <span class="absolute -top-1 -right-3 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+            <span class="text-xs">Cart</span>
+        </a>
+    </div>
+
+    <main class="pt-[60px]">
+        <div class="w-full mx-auto">
+            <section class="relative h-[30vh] sm:h-[40vh] md:h-[50vh] overflow-hidden" id="heroSection">
+                <div class="absolute inset-0" id="heroSlides">
+                    <div class="w-full h-full absolute slide">
+                        <div class="w-full h-full relative">
+                            <img src="./images/a1.jpg" alt="Gift 1" class="w-full h-full object-cover filter blur-sm">
+                            <div class="absolute inset-0 bg-black/50"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center px-4 sm:px-8 max-w-lg">
+                                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">Heartfelt Gifts</h3>
+                                    <p class="mt-2 md:mt-4 text-white text-xs sm:text-sm md:text-lg drop-shadow-md">"The best gifts come from the heart."</p>
+                                    <div class="mt-3 md:mt-6">
+                                        <button class="bg-yellow-500 text-white px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm font-medium rounded-full hover:bg-yellow-600 focus:outline-none shadow-lg transform hover:scale-105 transition-all duration-300">Shop Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-full absolute slide hidden">
+                        <div class="w-full h-full relative">
+                            <img src="./images/a2.jpg" alt="Gift 2" class="w-full h-full object-cover filter blur-sm">
+                            <div class="absolute inset-0 bg-black/50"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center px-4 sm:px-8 max-w-lg">
+                                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">Personal Touch</h3>
+                                    <p class="mt-2 md:mt-4 text-white text-xs sm:text-sm md:text-lg drop-shadow-md">"A gift says 'I see you'."</p>
+                                    <div class="mt-3 md:mt-6">
+                                        <button class="bg-yellow-500 text-white px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm font-medium rounded-full hover:bg-yellow-600 focus:outline-none shadow-lg transform hover:scale-105 transition-all duration-300">Explore More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-full absolute slide hidden">
+                        <div class="w-full h-full relative">
+                            <img src="./images/a3.jpg" alt="Gift 3" class="w-full h-full object-cover filter blur-sm">
+                            <div class="absolute inset-0 bg-black/50"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center px-4 sm:px-8 max-w-lg">
+                                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">Memory Makers</h3>
+                                    <p class="mt-2 md:mt-4 text-white text-xs sm:text-sm md:text-lg drop-shadow-md">"Gifts wrapped in love."</p>
+                                    <div class="mt-3 md:mt-6">
+                                        <button class="bg-yellow-500 text-white px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm font-medium rounded-full hover:bg-yellow-600 focus:outline-none shadow-lg transform hover:scale-105 transition-all duration-300">View Collection</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-10">
+                    <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 dot active" data-slide="0"></button>
+                    <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 dot" data-slide="1"></button>
+                    <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 dot" data-slide="2"></button>
+                </div>
+            </section>
+
+            <div class="container mx-auto px-6 py-10">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center md:max-w-7xl md:ml-20">
+                  <div class="relative w-full bg-white rounded-xl shadow-lg overflow-hidden">
+                      <div class="grid grid-cols-4 gap-2 p-4">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8-wYD2QsreOoGC_hbiqvpNWZ7GUxL_Gcm_w&s" alt="Personalized 1" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSBgZuC-UmJYHM89hCqPE7lZvFLzCayNhHF2mGaLDUIG2WibCkqI8vSp5W_wT-Ie-qRpChy_fWut_b-HUY_V8WQ9paAuweulHC_BYFcj91CCO1Ky4SOREcxQLQ" alt="Personalized 2" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://images.meesho.com/images/products/484599307/ziu2z_1200.jpg" alt="Personalized 3" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREiYocVv132gU2EDDky4AUKMG3TMuZ-crGcw&s" alt="Personalized 4" class="w-full h-32 object-cover rounded-lg">
+                      </div>
+                      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md">
+                          PERSONALIZED
+                      </div>
+                  </div>
+          
+                  <div class="relative w-full bg-white rounded-xl shadow-lg overflow-hidden">
+                      <div class="grid grid-cols-4 gap-2 p-4">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8-wYD2QsreOoGC_hbiqvpNWZ7GUxL_Gcm_w&s" alt="Corporate 1" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSBgZuC-UmJYHM89hCqPE7lZvFLzCayNhHF2mGaLDUIG2WibCkqI8vSp5W_wT-Ie-qRpChy_fWut_b-HUY_V8WQ9paAuweulHC_BYFcj91CCO1Ky4SOREcxQLQ" alt="Corporate 2" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://images.meesho.com/images/products/484599307/ziu2z_1200.jpg" alt="Corporate 3" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREiYocVv132gU2EDDky4AUKMG3TMuZ-crGcw&s" alt="Corporate 4" class="w-full h-32 object-cover rounded-lg">
+                      </div>
+                      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md">
+                          CORPORATE
+                      </div>
+                  </div>
+          
+                  <div class="relative w-full bg-white rounded-xl shadow-lg overflow-hidden">
+                      <div class="grid grid-cols-4 gap-2 p-4">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8-wYD2QsreOoGC_hbiqvpNWZ7GUxL_Gcm_w&s" alt="Mementos 1" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSBgZuC-UmJYHM89hCqPE7lZvFLzCayNhHF2mGaLDUIG2WibCkqI8vSp5W_wT-Ie-qRpChy_fWut_b-HUY_V8WQ9paAuweulHC_BYFcj91CCO1Ky4SOREcxQLQ" alt="Mementos 2" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://images.meesho.com/images/products/484599307/ziu2z_1200.jpg" alt="Mementos 3" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREiYocVv132gU2EDDky4AUKMG3TMuZ-crGcw&s" alt="Mementos 4" class="w-full h-32 object-cover rounded-lg">
+                      </div>
+                      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md">
+                          MEMENTOS
+                      </div>
+                  </div>
+          
+                  <div class="relative w-full bg-white rounded-xl shadow-lg overflow-hidden">
+                      <div class="grid grid-cols-4 gap-2 p-4">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8-wYD2QsreOoGC_hbiqvpNWZ7GUxL_Gcm_w&s" alt="Mementos 1" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSBgZuC-UmJYHM89hCqPE7lZvFLzCayNhHF2mGaLDUIG2WibCkqI8vSp5W_wT-Ie-qRpChy_fWut_b-HUY_V8WQ9paAuweulHC_BYFcj91CCO1Ky4SOREcxQLQ" alt="Mementos 2" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://images.meesho.com/images/products/484599307/ziu2z_1200.jpg" alt="Mementos 3" class="w-full h-32 object-cover rounded-lg">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREiYocVv132gU2EDDky4AUKMG3TMuZ-crGcw&s" alt="Mementos 4" class="w-full h-32 object-cover rounded-lg">
+                      </div>
+                      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md">
+                          MEMENTOS
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="max-w-6xl mx-auto py-10">
+            <h2 class="text-3xl font-bold text-center mb-6">Shop By Occasions</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="./images/BirthDay-removebg-preview.png" alt="BirthDay" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-4 py-1 hover:bg-yellow-500 hover:text-white transition duration-300">BirthDay</button>
+                </div>
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="./images/Weddi-removebg-preview.png" alt="Wedding" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-4 py-1 hover:bg-yellow-500 hover:text-white transition duration-300">Wedding</button>
+                </div>
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="./images/Anniversary-removebg-preview.png" alt="Anniversary" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-4 py-1 hover:bg-yellow-500 hover:text-white transition duration-300">Anniversary</button>
+                </div>
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="images/home.webp" alt="Valentine's Day" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-2 py-1 md:px-4 hover:bg-yellow-500 hover:text-white transition duration-300 whitespace-nowrap">
+                        <span class="text-sm md:text-base">Valentine's</span> <span class="text-sm md:text-base">Day</span>
+                    </button>
+                </div>
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="images/home.webp" alt="House Warming" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-2 py-1 md:px-4 hover:bg-yellow-500 hover:text-white transition duration-300 whitespace-nowrap">
+                        <span class="text-sm md:text-base">House</span> <span class="text-sm md:text-base">Warming</span>
+                    </button>
+                </div>
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="images/fathers.png" alt="Father's Day" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-4 py-1 hover:bg-yellow-500 hover:text-white transition duration-300">Father's Day</button>
+                </div>
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="images/mothers.png" alt="Mother's Day" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-4 py-1 hover:bg-yellow-500 hover:text-white transition duration-300">Mother's Day</button>
+                </div>
+                <div class="bg-gray-100 p-4 shadow-lg rounded-lg text-center">
+                    <img src="images/teachers.png" alt="Teacher's Day" class="w-full h-48 object-cover rounded-md">
+                    <button class="mt-3 font-semibold text-yellow-500 border border-yellow-500 rounded-full px-4 py-1 hover:bg-yellow-500 hover:text-white transition duration-300">Teacher's Day</button>
+                </div>
+            </div>
+        </div>
+
+            <div class="max-w-6xl mx-auto py-10 px-4">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900">Shop on Budget</h2>
+                    <p class="text-gray-600">Affordable Picks for Every Occasion!</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="relative group">
+                        <img src="https://img.freepik.com/free-photo/new-year-white-festive-background-with-gift-tied-with-red-ribbon_169016-6319.jpg?t=st=1742275707~exp=1742279307~hmac=023c4ddd502d4e51272ea894370be5977ac5d0f1ea090ebc3878c5e0a0c9e1ab&w=1380" alt="Gift Under 500" class="w-full h-64 object-cover rounded-lg shadow-md">
+                        <div class="absolute inset-0 bg-black bg-opacity-10 rounded-lg group-hover:bg-opacity-50 transition duration-300"></div>
+                        <div class="absolute inset-0 flex flex-col items-start justify-center pl-6">
+                            <h3 class="text-white text-4xl font-bold">Gift Under 500</h3>
+                            <a href="#" class="mt-4 bg-black text-white px-4 py-2 rounded-full text-sm font-medium shadow-md transition-transform transform hover:scale-105">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <img src="https://img.freepik.com/free-photo/top-view-valentines-day-presents-red-package-dark-surface_140725-109004.jpg?t=st=1742275609~exp=1742279209~hmac=530410face7e8ee4431c768c473c5d9fc4e1ba0446522facd6204d37a2036d12&w=1380" alt="Gift Under 1000" class="w-full h-64 object-cover rounded-lg shadow-md">
+                        <div class="absolute inset-0 bg-black bg-opacity-10 rounded-lg group-hover:bg-opacity-50 transition duration-300"></div>
+                        <div class="absolute inset-0 flex flex-col items-start justify-center pl-6">
+                            <h3 class="text-white text-4xl font-bold">Gift Under 1000</h3>
+                            <a href="#" class="mt-4 bg-black text-white px-4 py-2 rounded-full text-sm font-medium shadow-md transition-transform transform hover:scale-105">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto py-10">
+                <h2 class="text-center text-3xl md:text-4xl font-bold mb-6">Top Picks Everyone Loves!</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4">
+                    <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs md:text-sm px-2 py-1 rounded z-10">-40%</span>
+                        <div class="relative overflow-hidden">
+                            <img src="https://m.media-amazon.com/images/I/61dbfBY9O9L._AC_UF894,1000_QL80_.jpg" alt="Personalized Mini Me" class="w-full h-64 object-cover rounded-t-lg transform transition duration-300 group-hover:scale-105">
+                            <div class="absolute top-3 right-4 flex flex-col gap-6 opacity-0 group-hover:opacity-100 transition">
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer transition duration-300" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleHeart(this)">
+                                        <i class="fa-regular fa-heart text-gray-600"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Add to Wishlist</span>
+                                </span>
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip(this)">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Quick View</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <p class="font-semibold">Personalized Mini Me: SuperMan</p>
+                            <p class="text-red-600 text-lg font-bold">Rs. 599.00 <span class="text-gray-400 line-through">Rs. 999.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs md:text-sm px-2 py-1 rounded z-10">-30%</span>
+                        <div class="relative overflow-hidden">
+                            <img src="https://orbiz.in/cdn/shop/files/clock_0019_DSC09839.jpg?v=1722428945" alt="Anniversary Wall Clock" class="w-full h-64 object-cover rounded-t-lg">
+                            <div class="absolute top-3 right-4 flex flex-col gap-6 opacity-0 group-hover:opacity-100 transition">
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer transition duration-300" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleHeart(this)">
+                                        <i class="fa-regular fa-heart text-gray-600"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Add to Wishlist</span>
+                                </span>
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip(this)">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Quick View</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <p class="font-semibold">Anniversary Wall Clock</p>
+                            <p class="text-red-600 text-lg font-bold">Rs.1,399.00 <span class="text-gray-400 line-through">Rs.1,999.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs md:text-sm px-2 py-1 rounded z-10">-40%</span>
+                        <div class="relative overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0ex6dyR1qtvnMHsE2w1gDjZC6VQZnzlhcQ&s" alt="SpiderMan Mini Me" class="w-full h-64 object-cover rounded-t-lg">
+                            <div class="absolute top-3 right-4 flex flex-col gap-6 opacity-0 group-hover:opacity-100 transition">
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer transition duration-300" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleHeart(this)">
+                                        <i class="fa-regular fa-heart text-gray-600"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Add to Wishlist</span>
+                                </span>
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip(this)">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Quick View</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <p class="font-semibold">Personalized Mini Me: SuperMan</p>
+                            <p class="text-red-600 text-lg font-bold">Rs. 599.00 <span class="text-gray-400 line-through">Rs. 999.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs md:text-sm px-2 py-1 rounded z-10">-30%</span>
+                        <div class="relative overflow-hidden">
+                            <img src="https://www.royalcustomify.com/wp-content/uploads/2024/12/10-x-14-Inch-Portrait-UV-Acrylic-Photo-Frame.jpg" alt="UV Acrylic Photo Frame - Portrait" class="w-full h-64 object-cover rounded-t-lg">
+                            <div class="absolute top-3 right-4 flex flex-col gap-6 opacity-0 group-hover:opacity-100 transition">
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer transition duration-300" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleHeart(this)">
+                                        <i class="fa-regular fa-heart text-gray-600"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Add to Wishlist</span>
+                                </span>
+                                <span class="relative group">
+                                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleTooltip(this)">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </span>
+                                    <span class="absolute right-full mr-2 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md opacity-0 transition duration-300 whitespace-nowrap w-max max-w-xs">Quick View</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-4 text-center">
+                            <p class="font-semibold">UV Acrylic Photo Frame - Portrait</p>
+                            <p class="text-red-600 text-lg font-bold">Rs. 699.00 <span class="text-gray-400 line-through">Rs. 999.00</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto py-10 px-5">
+                <div class="text-center">
+                    <h4 class="text-sm text-yellow-600 font-semibold">Testimonials</h4>
+                    <h2 class="text-3xl font-bold text-gray-800">Our Clients Review</h2>
+                </div>
+                <div class="mt-10">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                           <!-- Testimonial 1 -->
+                <div class="swiper-slide bg-gradient-to-br from-yellow-100 to-orange-200 p-2 rounded-2xl shadow-lg w-70 text-center transform hover:scale-105 transition duration-300">
+                    <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sophia White" 
+                         class="w-20 h-20 rounded-full mx-auto border-4 border-white  shadow-md">
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Sophia White</h3>
+                    <p class="text-sm text-gray-600 font-medium">Assistant Backend Developer</p>
+                    <p class="mt-3 text-gray-700 text-sm italic">"Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur."</p>
+                    <div class="mt-3 flex justify-center text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                </div>
+    
+                <!-- Testimonial 2 -->
+                <div class="swiper-slide bg-gradient-to-br from-blue-100 to-purple-200 p-2 rounded-2xl shadow-lg w-70 text-center transform hover:scale-105 transition duration-300">
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Scarlett Brown" 
+                         class="w-20 h-20 rounded-full mx-auto border-4 border-white  shadow-md">
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Scarlett Brown</h3>
+                    <p class="text-sm text-gray-600 font-medium">Chief Executive Officer</p>
+                    <p class="mt-3 text-gray-700 text-sm italic">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."</p>
+                    <div class="mt-3 flex justify-center text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                </div>
+    
+                <!-- Testimonial 3 -->
+                <div class="swiper-slide bg-gradient-to-br from-green-100 to-teal-200 p-2 rounded-2xl shadow-lg w-70 text-center transform hover:scale-105 transition duration-300">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Jacob Moore" 
+                         class="w-20 h-20 rounded-full mx-auto border-4 border-white  shadow-md">
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Jacob Moore</h3>
+                    <p class="text-sm text-gray-600 font-medium">Senior Developer</p>
+                    <p class="mt-3 text-gray-700 text-sm italic">"Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."</p>
+                    <div class="mt-3 flex justify-center text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                </div>
+                <!-- Testimonial 1 -->
+                <div class="swiper-slide bg-gradient-to-br from-yellow-100 to-orange-200 p-2 rounded-2xl shadow-lg w-70 text-center transform hover:scale-105 transition duration-300">
+                    <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sophia White" 
+                         class="w-20 h-20 rounded-full mx-auto border-4 border-white  shadow-md">
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Sophia White</h3>
+                    <p class="text-sm text-gray-600 font-medium">Assistant Backend Developer</p>
+                    <p class="mt-3 text-gray-700 text-sm italic">"Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur."</p>
+                    <div class="mt-3 flex justify-center text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                </div>
+    
+                <!-- Testimonial 2 -->
+                <div class="swiper-slide bg-gradient-to-br from-blue-100 to-purple-200 p-2 rounded-2xl shadow-lg w-70 text-center transform hover:scale-105 transition duration-300">
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Scarlett Brown" 
+                         class="w-20 h-20 rounded-full mx-auto border-4 border-white  shadow-md">
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Scarlett Brown</h3>
+                    <p class="text-sm text-gray-600 font-medium">Chief Executive Officer</p>
+                    <p class="mt-3 text-gray-700 text-sm italic">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."</p>
+                    <div class="mt-3 flex justify-center text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                </div>
+    
+                <!-- Testimonial 3 -->
+                <div class="swiper-slide bg-gradient-to-br from-green-100 to-teal-200 p-2 rounded-2xl shadow-lg w-70 text-center transform hover:scale-105 transition duration-300">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Jacob Moore" 
+                         class="w-20 h-20 rounded-full mx-auto border-4 border-white  shadow-md">
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Jacob Moore</h3>
+                    <p class="text-sm text-gray-600 font-medium">Senior Developer</p>
+                    <p class="mt-3 text-gray-700 text-sm italic">"Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."</p>
+                    <div class="mt-3 flex justify-center text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                </div>
+                        </div>
+                        <!-- <div class="swiper-pagination mt-2"></div> -->
+                        
+                    </div>
+                </div>
+            </div>
+            <section class=" py-10">
+                <div class="text-center">
+                    <h2 class="text-xl font-bold text-gray-800 bg-red-200 px-4 py-2 inline-block rounded-md">STRONGER TOGETHER: OUR MEMBERSHIPS</h2>
+                </div>
+        
+                <div class="swiper mySwiper1 mt-8 px-5">
+                    <div class="swiper-wrapper flex items-center">
+                        <div class="swiper-slide flex justify-center">
+                            <img src="./images/LOGO_A-05.webp" alt="BNI" class="w-40 h-auto">
+                        </div>
+                        <div class="swiper-slide flex justify-center">
+                            <img src="./images/LOGO_A-02.webp" alt="Lions Club" class="w-40 h-auto">
+                        </div>
+                        <div class="swiper-slide flex justify-center">
+                            <img src="./images/LOGO_A-09.webp" alt="GeM Marketplace" class="w-40 h-auto">
+                        </div>
+                        <div class="swiper-slide flex justify-center">
+                            <img src="./images/LOGO_MEM-07.webp" alt="MCC" class="w-40 h-auto">
+                        </div>
+                        <div class="swiper-slide flex justify-center">
+                            <img src="images/LOGO_MEM-08.webp" alt="Make in India" class="w-40 h-auto">
+                        </div>
+                        <div class="swiper-slide flex justify-center">
+                            <img src="./images/LOGO_MEM-03.webp" alt="ISO Certification" class="w-40 h-auto">
+                        </div>
+                        <div class="swiper-slide flex justify-center">
+                            <img src="./images/LOGO_A-09.webp" alt="Startup India" class="w-40 h-auto">
+                        </div>
+                        <div class="swiper-slide flex justify-center">
+                            <img src="./images/LOGO_MEM-01.webp" alt="MSME Certified" class="w-40 h-auto">
+                        </div>
+                    </div>
+                 </div>
+            </section>
+            <section class="py-10">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-blue-600">VISIT OUR YOUTUBE CHANNEL</h2>
+                </div>
+            
+                <div class="swiper mySwiper2 mt-8 px-5">
+                    <div class="swiper-wrapper flex items-center">
+                        <!-- Video 1 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=8JjK0L1-nKc" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/8JjK0L1-nKc/mqdefault.jpg" alt="Learn Python" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">Learn Python - Full Course for Beginners</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 2 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/rfscVS0vtbw/mqdefault.jpg" alt="JavaScript Tutorial" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">JavaScript Programming - Full Course</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 3 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=RGOj5yH7evk" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/RGOj5yH7evk/mqdefault.jpg" alt="HTML & CSS" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">HTML & CSS Full Course</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 4 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=PkZNo7MFNFg" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/PkZNo7MFNFg/mqdefault.jpg" alt="React Tutorial" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">React JS - Full Course for Beginners</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 5 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=8DvywoWv6fI" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/8DvywoWv6fI/mqdefault.jpg" alt="Data Structures" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">Data Structures Easy to Advanced</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 6 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=7S_tz1z_5EU" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/7S_tz1z_5EU/mqdefault.jpg" alt="C++ Tutorial" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">C++ Tutorial for Beginners</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 7 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=8hly31xKli0" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/8hly31xKli0/mqdefault.jpg" alt="Java Tutorial" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">Java Tutorial for Beginners</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 8 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=ZgmyN4yS35o" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/ZgmyN4yS35o/mqdefault.jpg" alt="SQL Tutorial" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">SQL for Beginners Tutorial</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 9 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=kqtD5dpn9C8" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/kqtD5dpn9C8/mqdefault.jpg" alt="Node.js Tutorial" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">Node.js Tutorial for Beginners</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+            
+                        <!-- Video 10 -->
+                        <div class="swiper-slide flex justify-center">
+                            <a href="https://www.youtube.com/watch?v=Ke90Tje7VS0" target="_blank" class="block w-54">
+                                <div class="relative bg-white shadow-md rounded-lg overflow-hidden group">
+                                    <img src="https://img.youtube.com/vi/Ke90Tje7VS0/mqdefault.jpg" alt="Django Tutorial" class="w-full h-36 object-cover">
+                                    <div class="p-2">
+                                        <p class="text-sm font-semibold text-gray-800 truncate">Django Tutorial for Beginners</p>
+                                        <p class="text-xs text-gray-600">freeCodeCamp.org</p>
+                                    </div>
+                                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300 flex items-center justify-center">
+                                        <i class="fas fa-play text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-16 bg-gradient-to-br from-yellow-50 to-amber-100 relative overflow-hidden">
+                <!-- Animated Gift Background Elements -->
+                <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                  <!-- Using SVG instead of external images for gift boxes -->
+                  <div class="gift-float animate-float-1" style="position: absolute; top: 15%; left: 5%; opacity: 0.15;">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="20" y="35" width="60" height="45" fill="#EAAC0F"/>
+                      <rect x="35" y="20" width="30" height="60" fill="#EAAC0F"/>
+                      <rect x="20" y="35" width="60" height="15" fill="#F5CE3E"/>
+                      <rect x="45" y="20" width="10" height="60" fill="#F5CE3E"/>
+                    </svg>
+                  </div>
+                  <div class="gift-float animate-float-2" style="position: absolute; top: 10%; right: 10%; opacity: 0.15;">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="15" y="25" width="50" height="40" fill="#EAAC0F"/>
+                      <rect x="30" y="15" width="20" height="50" fill="#EAAC0F"/>
+                      <rect x="15" y="25" width="50" height="10" fill="#F5CE3E"/>
+                      <rect x="35" y="15" width="10" height="50" fill="#F5CE3E"/>
+                    </svg>
+                  </div>
+                  <div class="gift-float animate-float-3" style="position: absolute; bottom: 10%; left: 15%; opacity: 0.15;">
+                    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="30" y="40" width="60" height="50" fill="#EAAC0F"/>
+                      <rect x="45" y="30" width="30" height="70" fill="#EAAC0F"/>
+                      <rect x="30" y="40" width="60" height="15" fill="#F5CE3E"/>
+                      <rect x="55" y="30" width="10" height="70" fill="#F5CE3E"/>
+                    </svg>
+                  </div>
+                  <div class="gift-float animate-float-4" style="position: absolute; bottom: 20%; right: 5%; opacity: 0.15;">
+                    <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="20" y="30" width="50" height="40" fill="#EAAC0F"/>
+                      <rect x="35" y="20" width="20" height="50" fill="#EAAC0F"/>
+                      <rect x="20" y="30" width="50" height="10" fill="#F5CE3E"/>
+                      <rect x="40" y="20" width="10" height="50" fill="#F5CE3E"/>
+                    </svg>
+                  </div>
+                </div>
+              
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                  <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-yellow-600 mb-2">Contact Us</h2>
+                    <p class="mt-3 text-gray-700 text-lg md:text-xl max-w-2xl mx-auto">Have questions about our gifts? Ready to make someone's day special? We're here to help!</p>
+                  </div>
+              
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                    <!-- Contact Form -->
+                    <div class="bg-white p-8 rounded-2xl shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                      <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-yellow-600 flex items-center justify-center mr-4">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                          </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Send Us a Message</h3>
+                      </div>
+                      <form action="#" method="POST" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                          <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent transition-all duration-300" placeholder="John Doe">
+                          </div>
+                          <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent transition-all duration-300" placeholder="john@example.com">
+                          </div>
+                        </div>
+                        <div>
+                          <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                          <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent transition-all duration-300" placeholder="How can we help?">
+                        </div>
+                        <div>
+                          <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+                          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent transition-all duration-300 resize-none" placeholder="Tell us about your gift needs..."></textarea>
+                        </div>
+                        <div>
+                          <button type="submit" class="w-full bg-yellow-600 text-white px-6 py-4 rounded-lg font-medium hover:bg-yellow-700 focus:outline-none shadow-lg transform hover:scale-102 transition-all duration-300 flex items-center justify-center">
+                            <span>Send Message</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+              
+                    <!-- Get in Touch Section -->
+                    <div class="bg-yellow-600 p-8 rounded-2xl shadow-xl text-white relative overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                      <div class="relative z-10">
+                        <h3 class="text-2xl font-extrabold mb-8">Get in Touch</h3>
+                        
+                        <div class="space-y-8">
+                          <div class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                            <div class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-4 shadow-md">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <p class="text-sm font-semibold text-white text-opacity-80">Phone</p>
+                              <p class="text-lg font-medium">+1 (555) 123-4567</p>
+                            </div>
+                          </div>
+                          
+                          <div class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                            <div class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-4 shadow-md">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <p class="text-sm font-semibold text-white text-opacity-80">Email</p>
+                              <p class="text-lg font-medium">support@giftcompany.com</p>
+                            </div>
+                          </div>
+                          
+                          <div class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                            <div class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-4 shadow-md">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <p class="text-sm font-semibold text-white text-opacity-80">Address</p>
+                              <p class="text-lg font-medium">123 Gift Lane, Suite 456<br>Present City, PC 78910</p>
+                            </div>
+                          </div>
+                          
+                          <div class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                            <div class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-4 shadow-md">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                            </div>
+                            <div>
+                              <p class="text-sm font-semibold text-white text-opacity-80">Business Hours</p>
+                              <p class="text-lg font-medium">Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                          <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                          <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-30 hover:scale-110">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                              </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-30 hover:scale-110">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                              </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-30 hover:scale-110">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                              </svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-30 hover:scale-110">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
+                              </svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Gift Box Decoration in SVG -->
+                      <div class="absolute -bottom-10 -right-10 w-40 h-40 opacity-10">
+                        <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="40" y="60" width="80" height="60" fill="#FFFFFF"/>
+                          <rect x="60" y="40" width="40" height="80" fill="#FFFFFF"/>
+                          <rect x="40" y="60" width="80" height="20" fill="#FFFFFF" fill-opacity="0.6"/>
+                          <rect x="70" y="40" width="20" height="80" fill="#FFFFFF" fill-opacity="0.6"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              
+              <style>
+                /* Float animation keyframes */
+                @keyframes float-1 {
+                  0% { transform: translateY(0) rotate(-15deg); }
+                  50% { transform: translateY(-10px) rotate(-10deg); }
+                  100% { transform: translateY(0) rotate(-15deg); }
+                }
+                
+                @keyframes float-2 {
+                  0% { transform: translateY(0) rotate(20deg); }
+                  50% { transform: translateY(-15px) rotate(25deg); }
+                  100% { transform: translateY(0) rotate(20deg); }
+                }
+                
+                @keyframes float-3 {
+                  0% { transform: translateY(0) rotate(10deg); }
+                  50% { transform: translateY(-12px) rotate(15deg); }
+                  100% { transform: translateY(0) rotate(10deg); }
+                }
+                
+                @keyframes float-4 {
+                  0% { transform: translateY(0) rotate(-10deg); }
+                  50% { transform: translateY(-8px) rotate(-5deg); }
+                  100% { transform: translateY(0) rotate(-10deg); }
+                }
+                
+                /* Apply animations */
+                .animate-float-1 {
+                  animation: float-1 6s ease-in-out infinite;
+                }
+                
+                .animate-float-2 {
+                  animation: float-2 8s ease-in-out infinite;
+                }
+                
+                .animate-float-3 {
+                  animation: float-3 7s ease-in-out infinite;
+                }
+                
+                .animate-float-4 {
+                  animation: float-4 9s ease-in-out infinite;
+                }
+                
+                /* Hover effects */
+                .hover\:scale-102:hover {
+                  transform: scale(1.02);
+                }
+              </style>
+              <!-- Scroll Indicator and WhatsApp Button Section -->
+              <section class="relative pb-20 md:pb-10">
+                <!-- WhatsApp Button -->
+                <a href="https://wa.me/15551234567" class="fixed bottom-20 md:bottom-5 right-2 md:right-5 w-14 h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center z-50 hover:scale-110 transition-transform duration-300 animate-pulse" aria-label="Contact us on WhatsApp">
+                  <!-- Proper WhatsApp Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                  </svg>
+                </a>
+              
+                <!-- Arrow Circle Scroll Indicator -->
+                <div class="fixed bottom-36 md:bottom-24 right-2 md:right-6 w-12 h-12 z-40" id="arrow-container">
+                  <!-- Circle container -->
+                  <div class="w-full h-full rounded-full border-2 border-yellow-600 relative overflow-hidden">
+                    <!-- Sand Fill -->
+                    <div id="sand-fill" class="absolute bottom-0 left-0 right-0 bg-yellow-600 transition-all duration-300" style="height: 0%"></div>
+                    
+                    <!-- Three Up Arrows -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center space-y-1">
+                      <!-- First Arrow -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+                      </svg>
+                      
+                      <!-- Second Arrow -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+                      </svg>
+                      
+                      <!-- Third Arrow -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+            </section>
+  <!-- Footer Section -->
+<section class="py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-yellow-900 text-white relative overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="animate-float-1 absolute top-10 left-5 opacity-10">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="15" y="25" width="50" height="40" fill="#F5CE3E"/>
+          <rect x="30" y="15" width="20" height="50" fill="#F5CE3E"/>
+        </svg>
+      </div>
+      <div class="animate-float-2 absolute bottom-20 right-10 opacity-10">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="35" width="60" height="45" fill="#EAAC0F"/>
+          <rect x="35" y="20" width="30" height="60" fill="#EAAC0F"/>
+        </svg>
+      </div>
+    </div>
+  
+    <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <!-- Company Info -->
+        <div>
+          <a href="#" class="flex items-center mb-6">
+            <img src="./images/logo.avif" alt="Logo" class="h-12 w-auto">
+          </a>
+          <p class="text-gray-300 text-sm leading-relaxed">
+            Crafting heartfelt gifts that bring joy and create lasting memories. Your one-stop shop for personalized presents.
+          </p>
+          <div class="mt-6 flex space-x-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-yellow-600 bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-40 hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-yellow-600 bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-40 hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-yellow-600 bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-40 hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-yellow-600 bg-opacity-20 flex items-center justify-center transform transition-all duration-300 hover:bg-opacity-40 hover:scale-110">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+  
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-xl font-bold text-yellow-500 mb-6">Quick Links</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-300 hover:text-yellow-400 transition duration-300">Home</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-yellow-400 transition duration-300">Shop</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-yellow-400 transition duration-300">Celebration</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-yellow-400 transition duration-300">Birthday Gift</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-yellow-400 transition duration-300">Vehicle Gift</a></li>
+          </ul>
+        </div>
+  
+        <!-- Contact Info -->
+        <div>
+          <h3 class="text-xl font-bold text-yellow-500 mb-6">Get in Touch</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span class="text-gray-300">+1 (555) 123-4567</span>
+            </li>
+            <li class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span class="text-gray-300">support@giftcompany.com</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class="text-gray-300">123 Gift Lane, Suite 456, Present City, PC 78910</span>
+            </li>
+          </ul>
+        </div>
+  
+        <!-- Newsletter Subscription -->
+        <div>
+          <h3 class="text-xl font-bold text-yellow-500 mb-6">Subscribe to Our Newsletter</h3>
+          <p class="text-gray-300 text-sm mb-4">Stay updated with our latest offers and gift ideas!</p>
+          <form action="#" method="POST" class="space-y-4">
+            <input type="email" placeholder="Enter your email" required class="w-full px-4 py-3 border border-gray-600 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300">
+            <button type="submit" class="w-full bg-yellow-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-yellow-700 focus:outline-none shadow-lg transform hover:scale-105 transition-all duration-300">
+              Subscribe Now
+            </button>
+          </form>
+        </div>
+      </div>
+  
+      <!-- Bottom Bar -->
+      <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
+        <p>&copy; 2025 Gift Company. All rights reserved.</p>
+        <div class="mt-4 md:mt-0 space-x-6">
+          <a href="#" class="hover:text-yellow-400 transition duration-300">Privacy Policy</a>
+          <a href="#" class="hover:text-yellow-400 transition duration-300">Terms of Service</a>
+          <a href="#" class="hover:text-yellow-400 transition duration-300">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <style>
+    @media (max-width: 639px) {
+    .text-sm {
+        font-size: 0.875rem; /* 14px */
+        line-height: 1.25rem;
+    }
+    button {
+        white-space: nowrap; /* Ensure no wrapping */
+        overflow: hidden; /* Hide overflow if any */
+        text-overflow: ellipsis; /* Add ellipsis if text still overflows */
+    }
+}
+    /* Reuse existing float animations from your code */
+    @keyframes float-1 {
+      0% { transform: translateY(0) rotate(-15deg); }
+      50% { transform: translateY(-10px) rotate(-10deg); }
+      100% { transform: translateY(0) rotate(-15deg); }
+    }
+    
+    @keyframes float-2 {
+      0% { transform: translateY(0) rotate(20deg); }
+      50% { transform: translateY(-15px) rotate(25deg); }
+      100% { transform: translateY(0) rotate(20deg); }
+    }
+  
+    .animate-float-1 {
+      animation: float-1 6s ease-in-out infinite;
+    }
+    
+    .animate-float-2 {
+      animation: float-2 8s ease-in-out infinite;
+    }
+  </style>
+  
+  <style>
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+  
+  <script>
+    // Arrow Circle Scroll Indicator JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      const sandFill = document.getElementById('sand-fill');
+      
+      function updateScrollIndicator() {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercentage = (scrollTop / scrollHeight) * 100;
+        
+        // Update the sand fill height
+        sandFill.style.height = `${scrollPercentage}%`;
+      }
+      
+      // Update indicator on page load
+      updateScrollIndicator();
+      
+      // Update indicator on scroll
+      window.addEventListener('scroll', updateScrollIndicator);
+    });
+  </script>
+        </div>
+    </main>
+
+    <script>
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const closeSidebar = document.getElementById('closeSidebar');
+    
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+    
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+        });
+    
+        // Hero Slider
+        const heroSlides = document.getElementById('heroSlides');
+        const slides = heroSlides.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+    
+        if (slides.length > 0) {
+            slides[0].classList.remove('hidden');
+        }
+    
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.add('hidden'));
+            slides[index].classList.remove('hidden');
+            dots.forEach(dot => dot.classList.remove('active', 'bg-white', 'w-3'));
+            dots[index].classList.add('active', 'bg-white', 'w-3');
+            currentSlide = index;
+        }
+    
+        function showNextSlide() {
+            if (slides.length > 0) {
+                let nextSlide = (currentSlide + 1) % slides.length;
+                showSlide(nextSlide);
+            }
+        }
+    
+        let autoSlideInterval;
+        function startSlider() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(showNextSlide, 5000);
+        }
+        startSlider();
+    
+        heroSlides.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        heroSlides.addEventListener('mouseleave', () => setTimeout(startSlider, 100));
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                clearInterval(autoSlideInterval);
+                setTimeout(startSlider, 100);
+            });
+        });
+    
+        // Tooltip Functions
+        function showTooltip(element) {
+            const tooltip = element.nextElementSibling;
+            tooltip.classList.remove("opacity-0");
+        }
+    
+        function hideTooltip(element) {
+            const tooltip = element.nextElementSibling;
+            tooltip.classList.add("opacity-0");
+        }
+    
+        function toggleTooltip(element) {
+            const tooltip = element.nextElementSibling;
+            tooltip.classList.toggle("opacity-0");
+        }
+    
+        // Swiper Initialization for Testimonials (mySwiper)
+        var swiperTestimonials = new Swiper('.mySwiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 3000, // 3 seconds
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    
+        // Swiper Initialization for Memberships (mySwiper1)
+        var swiperMemberships = new Swiper('.mySwiper1', {
+            slidesPerView: 2, // Start with 2 slides visible
+            spaceBetween: 10, // Reduced spacing
+            loop: true, // Ensure continuous looping
+            centeredSlides: false, // Align slides to the left for smoother looping
+            autoplay: {
+                delay: 2000, // 2 seconds
+                disableOnInteraction: false, // Keep autoplay even after interaction
+            },
+            speed: 600, // Smooth transition speed (in milliseconds)
+            slidesPerGroup: 1, // Move one slide at a time
+            breakpoints: {
+                640: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+                1024: {
+                    slidesPerView: 4, // Show 4 slides on larger screens (fewer than 5 to ensure looping with 8 items)
+                    spaceBetween: 15,
+                },
+            },
+        });
+        // Swiper Initialization for YouTube Videos (mySwiper2)
+    var swiperYouTube = new Swiper('.mySwiper2', {
+        slidesPerView: 1,
+        spaceBetween: 0, // Reduced to 2px
+        loop: true, // Enable looping
+        autoplay: {
+            delay: 2500, // 2.5 seconds
+            disableOnInteraction: false, // Keep autoplay even after interaction
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 1, // Reduced to 2px
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 1, // Reduced to 2px
+            },
+        },
+    });
+    </script>
+</body>
+</html>

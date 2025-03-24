@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .gift-box {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .gift-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .gift-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gift-button:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 214, 0, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .gift-button:hover::before {
+            left: 100%;
+        }
+
+        .image-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gift-image {
+            transition: transform 0.5s ease;
+        }
+
+        .gift-box:hover .gift-image {
+            transform: scale(1.1);
+        }
+
+        .pulse-animation {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(253, 224, 71, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(253, 224, 71, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(253, 224, 71, 0);
+            }
+        }
+
+        .feedback-btn {
+            writing-mode: vertical-rl;
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #ffcc00, #ffd700);
+            padding: 12px 10px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+            color: #1a1a1a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feedback-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .sort-by {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: #1a1a1a;
+            transition: color 0.3s ease;
+        }
+
+        .sort-by:hover {
+            color: #ffcc00;
+        }
+
+        .product-description {
+            border-radius: 50px; /* Circular edges for gift box */
+            height: 70%; /* Decreased height */
+        }
+
+        .similar-product-box {
+            border: 2px solid #ffd700;
+            background-color: #fff7cc;
+        }
+
+        .review-button {
+            border: 2px solid #ffd700; /* Yellow border for Write a Review button */
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product-image {
+                width: 100%;
+                max-width: 300px;
+            }
+            .product-details {
+                align-items: center;
+                text-align: center;
+            }
+            .size-box {
+                width: 2rem;
+                height: 2rem;
+            }
+            .similar-products-container {
+                flex-direction: row; /* Keep boxes in a row */
+                flex-wrap: nowrap; /* Prevent wrapping to next line */
+                justify-content: space-between; /* Space them evenly */
+                align-items: center;
+            }
+            .similar-product-box {
+                width: 12vw; /* Decrease width for mobile */
+                height: 12vw; /* Decrease height for mobile */
+                min-width: 40px; /* Minimum width to ensure visibility */
+                min-height: 40px; /* Minimum height to ensure visibility */
+            }
+            .sort-by {
+                justify-content: center;
+            }
+            .delivery-info {
+                text-align: center;
+            }
+        }
+
+         /* Mobile-specific styles */
+     @media (max-width: 767px) {
+        /* Adjust navbar icons spacing before search opens */
+        .nav-icons {
+            gap: 1rem; /* Explicitly set gap to override Tailwind's space-x-7 */
+        }
+
+        /* Search input styling when open */
+        #search-input.w-64 {
+            width: 90px; /* Fixed width to stay adjacent to logo, not stretch to right */
+            position: absolute;
+            left:-7rem; /* Positioned right of logo (h-10 + padding) */
+            top: 0;
+            z-index: 20;
+            border-radius: 0;
+            padding: 0.5rem 0.5rem 1rem 2rem; /* Adjusted padding to align with search icon */
+            margin-top:-5px;
+            opacity: 1 !important;
+            height: 100%;
+            background: white;
+        }
+
+        /* Search icon positioning before opening */
+        #search-icon {
+            position: relative; /* Changed to relative before opening */
+            z-index: 30;
+        }
+
+        /* Search icon positioning when search is active */
+        .search-active #search-icon {
+            position: absolute;
+            left: -9rem; /* Slightly right of logo, inside search box */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        .navbar-container {
+            position: relative;
+            height: 60px;
+        }
+
+        /* Hide specific icons when search is active */
+        .search-active .nav-icons .user-icon,
+        .search-active .nav-icons .favorite-icon,
+        .search-active .nav-icons .cart-icon {
+            display: none !important;
+        }
+
+        /* Ensure logo remains visible */
+        .navbar-container .flex.items-center > a {
+            z-index: 30;
+        }
+
+        /* Cart icon spacing with higher specificity */
+        .nav-icons .cart-icon {
+            margin-right: 1.5rem !important; /* Increased space to separate from dropdown */
+        }
+
+        /* Mobile menu button styling */
+        #mobile-menu-button {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            display: block !important;
+        }
+
+        /* Mobile menu styling */
+        #mobile-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+        }
+
+        .header-text {
+            font-size: 1.5rem !important;
+            line-height: 1.75rem !important;
+        }
+
+        .offer-banner {
+            height: 3rem !important;
+            padding: 0.5rem !important;
+        }
+
+        .offer-banner h3 {
+            font-size: 1rem !important;
+        }
+    }
+    </style>
+</head>
+<body class="font-sans">
+
+    <nav class="w-full p-4 border-gray-200 dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-10 navbar-container">
+            <a href="#" class="flex items-center space-x-2">
+                <img src="./Images/Inkin-india-final-logo-01_320x.avif" class="h-10" alt="Logo">
+            </a>
+            <ul class="hidden md:flex space-x-6 font-medium text-lg">
+                <li><a href="Index.html" class="text-yellow-500 font-semibold">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Shop</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Celebration</a></li>
+                <li><a href="BirthdayGift.html" class="hover:text-yellow-500 transition">Birthday Gift</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition">Vehicle Gift</a></li>
+            </ul>
+            <div class="flex items-center space-x-7 nav-icons">
+                <div class="relative flex items-center">
+                    <button id="search-icon" class="text-gray-700 hover:text-yellow-500 focus:outline-none">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <input type="text" id="search-input"
+                        class="w-0 opacity-0 border border-gray-300 rounded-full px-3 py-2 bg-white transition-all duration-300 ease-in-out outline-none"
+                        placeholder="Search..." />
+                </div>
+                <a href="#" class="text-gray-700 hover:text-yellow-500 nav-icon user-icon"><i class="fas fa-user"></i></a>
+                <a href="#" class="relative nav-icon favorite-icon">
+                    <i class="fas fa-heart text-gray-700 hover:text-yellow-500"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                </a>
+                <a href="#" class="relative nav-icon cart-icon">
+                    <i class="fas fa-shopping-cart text-gray-700 hover:text-yellow-500"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1">0</span>
+                </a>
+            </div>
+            <button class="md:hidden text-gray-700 focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div class="hidden md:hidden bg-white shadow-md p-4" id="mobile-menu">
+            <ul class="flex flex-col space-y-4 text-lg font-medium text-gray-900">
+                <li><a href="Index.html" class="hover:text-yellow-500">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Shop</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Celebration</a></li>
+                <li><a href="BirthdayGift.html" class="hover:text-yellow-500">BirthDay Gift</a></li>
+                <li><a href="#" class="hover:text-yellow-500">Vehicle Gift</a></li>
+            </ul>
+        </div>
+    </nav>
+        
+
+    <!-- Sort By Section -->
+    <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="sort-by text-lg">
+            <i class="fas fa-sort-amount-down-alt text-yellow-500"></i>
+            <span>Sort By</span>
+        </div>
+    </div>
+
+    <!-- Product Display Section -->
+    <div class="max-w-7xl mx-auto py-2 px-3 product-container flex flex-col md:flex-row gap-4">
+        <!-- Left Side: Product Description -->
+        <div class="md:w-1/3 bg-yellow-100 p-6 rounded-lg gift-box product-description">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Sustainable Corporate Gift Set</h2>
+            <p class="text-gray-700 text-sm md:text-base mb-2">Product Material: Bamboo and Stainless Steel</p>
+            <p class="text-gray-700 text-sm md:text-base mb-2">Box Dimensions: 28cm x 24cm x 9cm</p>
+            <p class="text-gray-700 text-sm md:text-base mb-2">Box Weight: 750g</p>
+            <p class="text-gray-700 text-sm md:text-base mb-2">Product Item Quantity: 4.00 count</p>
+            <p class="text-gray-700 text-sm md:text-base mb-2">(Bamboo bottle, Bamboo bottle opener, Bamboo wooden/cork diary, Bamboo pen)</p>
+            <p class="text-gray-700 text-sm md:text-base">Box Colour: Black</p>
+        </div>
+
+        <!-- Center: Product Image -->
+        <div class="md:w-1/3 flex justify-center gift-box">
+            <div class="image-container">
+                <img src="https://www.bigsmall.in/cdn/shop/articles/S_B04602_1200x630.jpg?v=1686045560" alt="Product Image" class="gift-image w-full h-96 object-cover rounded-lg product-image">
+            </div>
+        </div>
+
+        <!-- Right Side: Product Details -->
+        <div class="md:w-1/3 flex flex-col  product-details">
+            <div class="text-3xl font-bold text-gray-900 mb-4">RS:469</div>
+            <button class="w-3/4 gift-button bg-yellow-500 text-white py-3 rounded-lg mb-4">Add to Cart</button>
+            <div class="text-lg font-bold text-gray-900 mb-2">SIZE: 12x9 INCH</div>
+            <div class="flex gap-2 mb-2 flex-wrap ">
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+            </div>
+            <div class="flex gap-2 mb-4 flex-wrap">
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+                <div class="size-box w-8 h-8 bg-gray-200 rounded cursor-pointer hover:bg-yellow-300 transition"></div>
+            </div>
+            <!-- <button class="w-3/4 gift-button bg-yellow-500 text-white py-3 rounded-lg mb-4 pulse-animation">Buy Now</button> -->
+            <a href="CartPage.html">
+            <button class="w-1/2 gift-button bg-yellow-500 text-white py-3 rounded-full mb-4 pulse-animation">
+                Buy Now
+            </button>
+            </a>
+            <div class="text-base font-semibold text-gray-700 mb-2">Secure Checkout With</div>
+            <div class="flex gap-2 mb-4 ">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="w-10 h-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="MasterCard" class="w-10 h-10">
+                <img src="https://m.economictimes.com/thumb/msid-74960608,width-1200,height-900,resizemode-4,imgsize-49172/upi-twitter.jpg" alt="UPI" class="w-10 h-10">
+            </div>
+            <div class="text-base font-medium text-gray-700 mb-2 cursor-pointer hover:text-yellow-500 transition">Return Policies +</div>
+            <div class="text-base font-medium text-gray-700 mb-4 cursor-pointer hover:text-yellow-500 transition">Product Disclaimer +</div>
+        </div>
+    </div>
+
+    <!-- Delivery Info Section -->
+    <div class="max-w-7xl mx-auto px-4 pb-5 delivery-info">
+        <p class="text-gray-700 text-sm md:text-base mb-2">Estimate delivery time: 3-5 days within Kerala & 7 Days rest of India</p>
+        <p class="text-gray-700 text-sm md:text-base mb-2">Use code <span class="font-bold text-yellow-500">"WELCOME10"</span> for 10% discount on your first order.</p>
+        <p class="text-gray-700 text-sm md:text-base">Free shipping: On all orders over Rs 499</p>
+    </div>
+
+    <!-- Customer Reviews and Similar Products -->
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row gap-4">
+        <!-- Left: Customer Reviews -->
+        <div class="md:w-2/3">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">Customer Reviews</h3>
+            <div class="flex items-center mb-4">
+                <i class="fas fa-star text-yellow-500"></i>
+                <i class="fas fa-star text-yellow-500"></i>
+                <i class="fas fa-star text-yellow-500"></i>
+                <i class="fas fa-star text-yellow-500"></i>
+                <i class="fas fa-star text-yellow-500"></i>
+            </div>
+            <button class="gift-button bg-white text-black py-2 px-4 rounded-lg review-button hover:bg-white">Write a Review</button>
+        </div>
+
+        <!-- Right: Similar Products -->
+        <div class="md:w-1/3">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4">Similar Products</h3>
+            <div class="similar-products-container flex gap-2 flex-wrap ">
+                <div class="gift-box w-16 h-16 rounded similar-product-box">
+                    <img src="https://m.media-amazon.com/images/I/51zvj-qBR6L.jpg" alt="" >
+                </div>
+                <div class="gift-box w-16 h-16 rounded similar-product-box">
+                    <img src="https://5.imimg.com/data5/SELLER/Default/2025/2/491144814/XA/GK/AQ/196082599/bamboo-water-bottle-500x500.jpg" alt="">
+                </div>
+                <div class="gift-box w-16 h-16 rounded similar-product-box">
+                    <img src="https://5.imimg.com/data5/SELLER/Default/2024/6/431023378/DT/TT/OF/224782988/bamboo-water-bottle-500x500.jpeg" alt="" class="w-16 h-16">
+                </div>
+                <div class="gift-box w-16 h-16 rounded similar-product-box">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTrr-5tQiXJ8DOyK0o3ywIJxzCvrbCXODULF3vgEuULw78h2OYbkrYnispdTGVQu4BT_s&usqp=CAU" alt="">
+                </div>
+                <div class="gift-box w-16 h-16 rounded similar-product-box">
+                    <img src="https://cdn.shopify.com/s/files/1/0668/4544/2297/files/image4_2f587495-5a18-4792-9b4e-ad5b3caf984d.png?v=1713966754" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Button -->
+    <div class="feedback-btn">Feedback</div>
+
+    <!-- Call Contact Button -->
+    <div class="fixed bottom-4 right-4 bg-yellow-500 text-white p-4 rounded-full shadow-lg flex items-center gap-2 hover:bg-yellow-600 transition pulse-animation">
+        <i class="fas fa-headset"></i>
+        
+    </div>
+
+    <script>
+        // NavBar Search Input Box
+    const searchIcon = document.getElementById('search-icon');
+    const searchInput = document.getElementById('search-input');
+    const navIcons = document.querySelector('.nav-icons');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const navbarContainer = document.querySelector('.navbar-container');
+
+    searchIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchInput.classList.toggle('w-64');
+        searchInput.classList.toggle('opacity-100');
+        searchInput.focus();
+
+        if (window.innerWidth < 768) {
+            if (searchInput.classList.contains('w-64')) {
+                navbarContainer.classList.add('search-active');
+                navIcons.style.display = 'flex'; // Keep container for layout
+            } else {
+                navbarContainer.classList.remove('search-active');
+                navIcons.style.display = 'flex';
+            }
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!searchIcon.contains(event.target) && !searchInput.contains(event.target)) {
+            searchInput.classList.remove('w-64', 'opacity-100');
+            if (window.innerWidth < 768) {
+                navbarContainer.classList.remove('search-active');
+                navIcons.style.display = 'flex'; // Restore all icons
+            }
+        }
+    });
+
+    // NavBar Mobile Menu
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+
+
+
+    </script>
+</body>
+</html>

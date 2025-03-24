@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brithday Gift</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- SwiperJS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+
+<body class="bg-yellow-100">
+    <!-- Navbar -->
+    <nav class="bg-yellow-50 p-4 flex items-center justify-between md:justify-around sticky top-0 z-50 shadow-lg">
+
+        <!-- Sort By Button -->
+        <button
+            class="bg-white text-gray-700 px-4 py-2 rounded-lg border border-gray-300 flex items-center space-x-2 hover:bg-gray-100">
+            <span>Sort By</span>
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Centered "Birthday Gift" - Visible on Desktop -->
+        <a href="#" class=" md:block bg-yellow-400 text-black px-6 py-2 rounded-full font-semibold">
+            Birthday Gift
+        </a>
+
+        <!-- Hamburger Menu Button (Mobile) -->
+        <button onclick="toggleMenu()" class="md:hidden text-gray-700 text-2xl">
+            ☰
+        </button>
+
+        <!-- Navigation Links -->
+        <ul class="hidden md:flex space-x-6">
+            <li><a href="Index.html" class="text-yellow-500 font-semibold font-medium text-lg">Home</a></li>
+            <li><a href="#" class="hover:text-yellow-500 transition font-medium text-lg">Shop</a></li>
+            <li><a href="#" class="hover:text-yellow-500 transition font-medium text-lg">Celebration</a></li>
+            <li><a href="#" class="hover:text-yellow-500 transition font-medium text-lg">Business Gift</a></li>
+            <li><a href="#" class="hover:text-yellow-500 transition font-medium text-lg">Vehicle Gift</a></li>
+        </ul>
+    </nav>
+
+    <!-- ✅ Mobile Menu -->
+    <div id="mobile-menu"
+        class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white w-64 p-6 rounded-lg shadow-lg relative">
+            <button id="close-menu" class="absolute top-2 right-4 text-gray-700 text-2xl">✖</button>
+            <ul class="flex flex-col space-y-6 text-center">
+                <li><a href="Index.html" class="text-yellow-500 font-semibold text-lg">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition text-lg">Shop</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition text-lg">Celebration</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition text-lg">Business Gift</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition text-lg">Vehicle Gift</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <section class="p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+
+
+
+
+            <div class="p-4 rounded-lg border shadow-lg hover:shadow-xl transition relative group  w-full mx-auto">
+                <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">Offer</span>
+                <!-- Favorite & View Icons -->
+                <div
+                    class="absolute top-3 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition text-center">
+
+                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer  text-center"><i
+                            class="fa-regular fa-heart"></i></span>
+                   
+                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md" onclick="openPopup()">
+                        <i class="fa-regular fa-eye"></i>
+                    </span>
+
+                    <!-- Popup Modal -->
+                    <div id="giftPopup"
+                        class="fixed inset-0  flex items-center justify-center hidden  w-full h-full bg-black bg-opacity-50 z-50">
+                        <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+                            <h2 class="text-xl font-semibold mb-4">Gift Product Details</h2>
+                            <p class="text-gray-600">Here are the details of the selected gift product...</p>
+                            <button onclick="closePopup()"
+                                class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-lg">Close</button>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript to Handle Popup -->
+                    <script>
+                        function openPopup() {
+                            document.getElementById('giftPopup').classList.remove('hidden');
+                        }
+
+                        function closePopup() {
+                            document.getElementById('giftPopup').classList.add('hidden');
+                        }
+                    </script>
+
+                </div>
+
+                <!-- Image Section -->
+                <div class="mt-3  w-64 h-40 bg-gray-200 rounded-lg overflow-hidden mx-auto">
+                    <img src="./Images/BirthDay.jpg" alt="Gift Image" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Gift Details -->
+                <p class="mt-3 text-center font-semibold text-gray-800">Gift Name</p>
+                <p class="text-center font-bold text-gray-900">Price: 666</p>
+
+                <!-- Ratings -->
+                <div class="flex justify-center items-center space-x-1 mt-2">
+                    <span class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</span>
+                    <span class="text-gray-500 text-sm">(88)</span>
+                </div>
+            </div>
+
+
+
+            <!-- Card2 -->
+            <div class="p-4 rounded-lg border shadow-lg hover:shadow-xl transition relative group  w-full mx-auto">
+                <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">Offer</span>
+                <!-- Favorite & View Icons -->
+                <div
+                    class="absolute top-3 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition text-center">
+
+                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer  text-center"><i
+                            class="fa-regular fa-heart"></i></span>
+                    <!-- <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md"><i
+                            class="fa-regular fa-eye"></i></span> -->
+                            <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md" onclick="product2()">
+                                <i class="fa-regular fa-eye"></i>
+                            </span>
+        
+                            <!-- Popup Modal -->
+                            <div id="giftPopup"
+                                class="fixed inset-0  flex items-center justify-center hidden  w-full h-full bg-black bg-opacity-50 z-50">
+                                <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+                                    <h2 class="text-xl font-semibold mb-4">Gift Product Details2</h2>
+                                    <p class="text-gray-600">Here are the details of the selected gift product...</p>
+                                    <button onclick="closePopup()"
+                                        class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-lg">Close</button>
+                                </div>
+                            </div>
+        
+                            <!-- JavaScript to Handle Popup -->
+                            <script>
+                                function product2() {
+                                    console.log("pro2");
+                                    
+                                    document.getElementById('giftPopup').classList.remove('hidden');
+                                }
+        
+                                function closePopup() {
+                                    document.getElementById('giftPopup').classList.add('hidden');
+                                }
+                            </script>
+                </div>
+
+                <!-- Image Section -->
+                <div class="mt-3  w-64 h-40 bg-gray-200 rounded-lg overflow-hidden mx-auto">
+                    <img src="./Images/BirthDay.jpg" alt="Gift Image" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Gift Details -->
+                <p class="mt-3 text-center font-semibold text-gray-800">Gift Name</p>
+                <p class="text-center font-bold text-gray-900">Price: 666</p>
+
+                <!-- Ratings -->
+                <div class="flex justify-center items-center space-x-1 mt-2">
+                    <span class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</span>
+                    <span class="text-gray-500 text-sm">(88)</span>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-lg border shadow-lg hover:shadow-xl transition relative group  w-full mx-auto">
+                <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">Offer</span>
+                <!-- Favorite & View Icons -->
+                <div
+                    class="absolute top-3 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition text-center">
+
+                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer  text-center"><i
+                            class="fa-regular fa-heart"></i></span>
+                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md"><i
+                            class="fa-regular fa-eye"></i></span>
+                </div>
+
+                <!-- Image Section -->
+                <div class="mt-3  w-64 h-40 bg-gray-200 rounded-lg overflow-hidden mx-auto">
+                    <img src="./Images/BirthDay.jpg" alt="Gift Image" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Gift Details -->
+                <p class="mt-3 text-center font-semibold text-gray-800">Gift Name</p>
+                <p class="text-center font-bold text-gray-900">Price: 666</p>
+
+                <!-- Ratings -->
+                <div class="flex justify-center items-center space-x-1 mt-2">
+                    <span class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</span>
+                    <span class="text-gray-500 text-sm">(88)</span>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-lg border shadow-lg hover:shadow-xl transition relative group  w-full mx-auto">
+                <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">Offer</span>
+                <!-- Favorite & View Icons -->
+                <div
+                    class="absolute top-3 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition text-center">
+
+                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer  text-center"><i
+                            class="fa-regular fa-heart"></i></span>
+                    <span class="bg-gray-100 p-2 rounded-full cursor-pointer shadow-md"><i
+                            class="fa-regular fa-eye"></i></span>
+                </div>
+
+                <!-- Image Section -->
+                <div class="mt-3  w-64 h-40 bg-gray-200 rounded-lg overflow-hidden mx-auto">
+                    <img src="./Images/BirthDay.jpg" alt="Gift Image" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Gift Details -->
+                <p class="mt-3 text-center font-semibold text-gray-800">Gift Name</p>
+                <p class="text-center font-bold text-gray-900">Price: 666</p>
+
+                <!-- Ratings -->
+                <div class="flex justify-center items-center space-x-1 mt-2">
+                    <span class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</span>
+                    <span class="text-gray-500 text-sm">(88)</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+</body>
+<script>
+    function toggleMenu() {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+    }
+
+    document.getElementById("close-menu").addEventListener("click", function () {
+        document.getElementById("mobile-menu").classList.add("hidden");
+    });
+</script>
+
+</html>
